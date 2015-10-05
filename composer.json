@@ -1,3 +1,4 @@
+
 {
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
@@ -27,6 +28,7 @@
             "tests/TestCase.php"
         ]
     },
+
     "scripts": {
         "post-install-cmd": [
             "php artisan clear-compiled",
