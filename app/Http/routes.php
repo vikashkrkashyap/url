@@ -12,3 +12,5 @@
 */
 
 Route::get('/','UrlController@index');
+Route::get('short','UrlController@showLink');
+Route::post('show','UrlController@show');
