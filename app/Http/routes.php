@@ -15,4 +15,4 @@ Route::get('/','UrlController@index');
 Route::get('short','UrlController@showLink');
 Route::post('show','UrlController@show');
 
-Route::get('{hash}','UrlController@hash');
+Route::get('/{key}','UrlController@hash');
