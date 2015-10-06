@@ -34,7 +34,7 @@ class UrlController extends Controller
         $data->save();
 
         return redirect('short');
-       
+
     }
 
     public function RandomControl()
