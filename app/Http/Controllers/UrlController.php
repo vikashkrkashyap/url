@@ -80,9 +80,10 @@ class UrlController extends Controller
             $url =$link->url;
             redirect($url, 301);
         }
-        else{
+        else {
             return redirect('/')->withErrors('Page not found');
         }
+        return "something went wrong";
     }
 
 
