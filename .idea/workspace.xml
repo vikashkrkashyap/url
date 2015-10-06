@@ -4,8 +4,6 @@
     <list default="true" id="289d4e9f-1afb-4af0-8910-0118e28f27cd" name="Default" comment="">
       <change type="DELETED" beforePath="C:\xampp\htdocs\ucut\Procfile.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/UrlController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/UrlController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ucut.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -60,14 +58,10 @@
       <file leaf-file-name="UrlController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UrlController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7753304">
-              <caret line="82" column="48" selection-start-line="82" selection-start-column="48" selection-end-line="82" selection-end-column="48" />
+            <state vertical-scroll-proportion="0.8876652">
+              <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
               <folding>
                 <element signature="e#40#52#0#PHP" expanded="true" />
-                <marker date="1444139974378" expanded="true" signature="216:1893" placeholder="{...}" />
-                <marker date="1444139974378" expanded="true" signature="1624:1889" placeholder="{...}" />
-                <marker date="1444139974378" expanded="true" signature="1720:1777" placeholder="{...}" />
-                <marker date="1444139974378" expanded="true" signature="1784:1887" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -474,14 +468,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UrlController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7753304">
-          <caret line="82" column="48" selection-start-line="82" selection-start-column="48" selection-end-line="82" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.8876652">
+          <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
           <folding>
             <element signature="e#40#52#0#PHP" expanded="true" />
-            <marker date="1444139974378" expanded="true" signature="216:1893" placeholder="{...}" />
-            <marker date="1444139974378" expanded="true" signature="1624:1889" placeholder="{...}" />
-            <marker date="1444139974378" expanded="true" signature="1720:1777" placeholder="{...}" />
-            <marker date="1444139974378" expanded="true" signature="1784:1887" placeholder="..." />
           </folding>
         </state>
       </provider>

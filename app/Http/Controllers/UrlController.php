@@ -83,6 +83,6 @@ class UrlController extends Controller
                 ->with('message', 'Invalid Link');
         }
     }
-}
+
 
 }
