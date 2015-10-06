@@ -77,7 +77,7 @@ class UrlController extends Controller
         $link = DB::table('keys')->where('key', '=', '$hash')->get();
 
         if ($link) {
-            return Redirect::to($link->url);
+            return redirect($link->url);
         } else {
             return Redirect::to('/')
                 ->with('message', 'Invalid Link');
