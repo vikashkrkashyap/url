@@ -65,7 +65,7 @@ class UrlController extends Controller
         $recent_url = last($data);
 
         $title = 'Ucut.com';
-        $url ="http:/www.ucut.in/".$recent_url;
+        $url ="http://www.ucut.in/".$recent_url;
 
         return view('Url.shortner',compact('title','url'));
     }
