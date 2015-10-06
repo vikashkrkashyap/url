@@ -77,7 +77,8 @@ class UrlController extends Controller
         $link = DB::table('keys')->where('key', '=', $key)->get();
 
         if ($link) {
-            return redirect($link->url);
+            $url =$link->url;
+            redirect($url, 301);
         }
         else{
             return redirect('/')->withErrors('Page not found');
