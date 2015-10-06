@@ -67,7 +67,7 @@ class UrlController extends Controller
         $recent_url = last($data);
 
         $title = 'Ucut.com';
-        $url = "http://www.ucut.in/" . $recent_url;
+        $url = "http://ucut.herokuapp.com/" . $recent_url;
 
         return view('Url.shortner', compact('title', 'url'));
 
@@ -79,13 +79,15 @@ class UrlController extends Controller
         $link = DB::table('keys')->where('key', '=', $key)->get();
 
         if ($link) {
-            $url =$link->url;
-            redirect($url, 301);
+           // $url =$link[0]->url;
+           return redirect($link[0]->url);
+
+
         }
         else {
             return redirect('/')->withErrors('Page not found');
         }
-        return "something went wrong";
+        //return "something went wrong";
     }
 
 
