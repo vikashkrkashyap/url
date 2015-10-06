@@ -72,15 +72,15 @@ class UrlController extends Controller
         return view('Url.shortner', compact('title', 'url'));
     }
 
-    public function hash($hash)
+    public function hash($key)
     {
-        $link = DB::table('keys')->where('key', '=', '$hash')->get();
+        $link = DB::table('keys')->where('key', '=', $key)->get();
 
         if ($link) {
             return redirect($link->url);
-        } else {
-            return Redirect::to('/')
-                ->with('message', 'Invalid Link');
+        }
+        else{
+            return redirect('/')->withErrors('Page not found');
         }
     }
 
