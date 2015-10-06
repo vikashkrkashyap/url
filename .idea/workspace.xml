@@ -4,7 +4,6 @@
     <list default="true" id="289d4e9f-1afb-4af0-8910-0118e28f27cd" name="Default" comment="">
       <change type="DELETED" beforePath="C:\xampp\htdocs\ucut\Procfile.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/UrlController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/UrlController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ucut.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -79,8 +78,8 @@
       <file leaf-file-name="UrlController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UrlController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5978022">
-              <caret line="75" column="26" selection-start-line="75" selection-start-column="26" selection-end-line="75" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.44835165">
+              <caret line="71" column="8" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="8" />
               <folding>
                 <element signature="e#40#52#0#PHP" expanded="true" />
               </folding>
@@ -489,8 +488,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UrlController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5978022">
-          <caret line="75" column="26" selection-start-line="75" selection-start-column="26" selection-end-line="75" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.44835165">
+          <caret line="71" column="8" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="8" />
           <folding>
             <element signature="e#40#52#0#PHP" expanded="true" />
           </folding>
