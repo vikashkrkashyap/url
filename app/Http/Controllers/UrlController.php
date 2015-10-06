@@ -69,7 +69,11 @@ class UrlController extends Controller
         $title = 'Ucut.com';
         $url = "http://www.ucut.in/" . $recent_url;
 
-        return view('Url.shortner', compact('title', 'url'));
+        //return view('Url.shortner', compact('title', 'url'));
+
+        $data = DB::table('keys')->lists('id');
+        $unique_id = last($data);
+        return $unique_id;
     }
 
     public function hash($key)
