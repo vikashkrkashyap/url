@@ -32,7 +32,7 @@ class UrlController extends Controller
         $data = new Key;
         $url = $request->input('input_data');
         $data->url = $url;
-        $data->ip = $request->getClientIp();
+        $data->ip = $request->ip();
         $data->key = $random;
         $data->save();
 
