@@ -15,10 +15,11 @@ class CreateHitsTable extends Migration
        Schema::create('hits',function (Blueprint $table){
 
            $table->increments('id');
-           $table->string('url_id');
+           $table->integer('url_id')->unsigned();
            $table->integer('hits')->unsigned();
-           $table->foreign('url_id')->references('id')->on('keys')->onDelete('cascade');
            $table->timestamps();
+           $table->foreign('url_id')->references('id')->on('keys')->onDelete('cascade');
+
        });
     }
 
