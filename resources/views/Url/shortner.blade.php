@@ -1,11 +1,9 @@
-<div style="margin:5% 25%;padding:25px 20px;">
-    <p style="font-size:50px;color:tomato;margin:15% 35%;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;">Ucut.in</p>
-    <form method="post" action="{{url('show')}}">
-        {!! csrf_field() !!}
-        <input type="url" name ="input_data" value="{{$url}}"
-               style="width:70%;height:50px;border:2px solid tomato;font-size:15px;font-weight:500;padding:8px 5px;border-radius:2px; ">
-        <input type="submit" value="Copy"
-               style="width:150px;height:50px;margin:2% auto;padding:5px 3px;background:tomato;color:white;
-               border:2px solid tomato;font-size:15px;font-weight: 600;">
-    </form>
+@extends('master')
+@section('main-content')
+<div class="main">
+    <p>Ucut.in</p>
+    <div class="input_box">
+        <input type="url" name ="input_data" value="{{$url}}" id ="url_input">
+        <input type="button" value="Copy" id="copy_button">
 </div>
+@stop

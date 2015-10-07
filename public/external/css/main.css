@@ -1,0 +1,45 @@
+body
+{
+    margin:0
+
+}
+.main
+{
+    margin:5% 25%;
+    padding:25px 20px;
+
+}
+.main p
+{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 50px;
+    color:tomato;
+    margin:15% 35%;
+}
+.input_box input
+{
+    width: 70%;
+    height:30px;
+    border: 2px solid tomato;
+    font-size: 15px;
+    font-weight: 500;
+    padding:8px 5px ;
+}
+.input_box input:focus
+{
+    background: ghostwhite;
+    outline: 2px solid tomato;!important;
+}
+.input_box input[type="submit"],#copy_button
+{
+    width: 140px;
+    height:50px;
+    padding:5px 3px;
+    margin: -1.5%;
+    background: tomato;
+    color: white;
+    border: 2px solid tomato;
+    border-radius:1px;
+    font-size: 15px;
+    font-weight: 600;
+}
