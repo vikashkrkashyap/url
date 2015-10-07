@@ -32,11 +32,13 @@ class UrlController extends Controller
         $data = new Key;
         $url = $request->input('input_data');
         $data->url = $url;
-        $data->ip = $request->ip();
+        $data->ip = $request->getClientIp();
         $data->key = $random;
         $data->save();
 
-        return redirect('short');
+        //return redirect('short');
+        $data = DB::table('keys')->lists('ip');
+        return $data;
 
     }
 
