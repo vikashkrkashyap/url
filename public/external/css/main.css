@@ -42,4 +42,10 @@ body
     border-radius:1px;
     font-size: 15px;
     font-weight: 600;
+    cursor: pointer;
+}
+.input_box input[type="submit"]:hover,#copy_button:hover
+{
+    background-color: #ff6621;
+    border:2px solid #ff6621;
 }

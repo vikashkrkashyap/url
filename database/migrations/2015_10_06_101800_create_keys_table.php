@@ -16,6 +16,7 @@ class CreateKeysTable extends Migration
             $table->increments('id');
             $table->text('url');
             $table->string('key');
+            $table->string('ip',40);
             $table->timestamps();
         });
     }
