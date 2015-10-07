@@ -29,10 +29,11 @@ class UrlController extends Controller
         } while (in_array($random, $token));
 
 
+        $ip = $this->get_client_ip();
         $data = new Key;
         $url = $request->input('input_data');
         $data->url = $url;
-        $data->ip = $request->$this->get_client_ip();
+        $data->ip = $request->$ip;
         $data->key = $random;
         $data->save();
 
