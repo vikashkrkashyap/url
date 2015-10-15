@@ -10,9 +10,36 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+//login and registration routes
+Route::post('test','DemoController@test');
 
-Route::get('/','UrlController@index');
-Route::get('short','UrlController@showLink');
+Route::get('login', [
+    'uses' =>'Auth\AuthController@getLogin',
+    'as'   => 'login']);
+Route::post('login', 'Auth\AuthController@postLogin');
+Route::get('logout', 'Auth\AuthController@getLogout');
+
+// Registration routes...
+Route::get('register', 'Auth\AuthController@getRegister');
+Route::post('register', 'Auth\AuthController@postRegister');
+
+//dashboard
+Route::get('dashboard',[
+    'uses' => 'UserController@showDashboard',
+     'as'  => 'dashboard']);
+Route::get('foo','UserController@demo');
+//url generator route
+
+Route::get('/',[
+    'uses' =>'UrlController@index',
+     'as'  =>'home']);
 Route::post('show','UrlController@show');
 
 Route::get('/{key}','UrlController@hash');
+
+//after login
+
+Route::post('postAjaxData','UserController@postUrl');
+Route::get('{hash}','UserController@hashUser');
+
+Route::get('hits','UserController@getHits');

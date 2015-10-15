@@ -15,9 +15,12 @@ class CreateKeysTable extends Migration
         Schema::create('keys',function(Blueprint $table){
             $table->increments('id');
             $table->text('url');
+            $table->integer('user_id')->nullale();
             $table->string('key');
             $table->string('ip',50);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

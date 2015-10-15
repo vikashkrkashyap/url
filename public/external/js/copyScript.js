@@ -1,8 +1,8 @@
-var CopyButton =document.querySelector('#copy_button');
+var CopyButton =document.querySelector('#copy');
 
 CopyButton.addEventListener('click',function(){
 
-    var Urlfiled = document.querySelector('#url_input');
+    var Urlfiled = document.querySelector('#msg');
 
     Urlfiled.select();
 
