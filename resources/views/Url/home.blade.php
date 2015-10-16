@@ -13,7 +13,6 @@
     </form>
 
     <div id="msg"></div>
-    <input type="button" value="copy" id ="copy" style="Display:none">
 
 </div>
 <script type="text/javascript" src ="{{url('external/js/ajaxHomeUrl.js')}}"></script>
