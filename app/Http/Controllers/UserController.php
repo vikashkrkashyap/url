@@ -20,19 +20,12 @@ class UserController extends MainController
 
     //function for showing the dashboard page after login or register
 
-    public function showDashboard()
+    public function showDashboard(Request $request)
     {
 
-
            $url_data = DB::table('keys')->where('user_id','=',Auth::user()->id)->get();
-               $hits = DB::table('hits')->join('keys','hits.url_id','=','keys.id')->get();
-               foreach($hits as $hit ){
 
-                   
-               }
-
-//return $url;
-           return view('User.dashboard',compact('url_data','hits'));
+             return view('User.dashboard',compact('url_data'));
 
     }
 
@@ -63,15 +56,15 @@ class UserController extends MainController
 
 
 
-  public function getHits(Request $request){
+  public function getHits(Request $request,$id){
     //$hits = DB::table('hits')->where('url_id','=','keys.id')->get();
-    if($request->ajax())
-    {
 
-       return response()->ajax([
-           'message' =>'successful'
-       ]) ;
-    }
+      $url = Key::findOrFail($id);
+      $url_id=$request->input('hits_url_id');
+      $hits = DB::table('hits')->where('hits.url_id','=',$url->id)->count();
+
+      return view('User.hits',compact('url','hits'));
+
   }
 
 

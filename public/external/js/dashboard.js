@@ -20,9 +20,9 @@ $(document).ready(function (){
 
             success: function(json){
                 $('#hr').fadeIn();
-                $('#msg').html('<a href="'+json['url']+'">'+json['url']+'</a>');
+                $('#msg').html('<a href="'+json['url']+'" target="_blank">'+json['url']+'</a>');
 
-                $('#copy').fadeIn();
+                //$('#copy').fadeIn();
                 $('#url_input').val("");
 
 

@@ -40,6 +40,5 @@ Route::get('/{key}','UrlController@hash');
 //after login
 
 Route::post('postAjaxData','UserController@postUrl');
-Route::get('{hash}','UserController@hashUser');
 
-Route::get('hits','UserController@getHits');
+Route::get('dashboard/{id}','UserController@getHits');

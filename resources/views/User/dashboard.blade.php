@@ -22,6 +22,7 @@
     <li><a id="show_hits">
         <p>{{$url->url}} </p>
          <p> {{'http//ucut.herokuapps.com/'.$url->key}}</p><br><hr>
+
          </a>
     </li>
 
@@ -30,11 +31,9 @@
 
     <div id ="right" style="float:left">
 
-        <p class="hits_count">Total hits :<span id="hit_show"></span>    </p>
-
     </div>
 </div>
-<button id="gh" >Button</button>
+
 <script type="text/javascript" src="{{url('external/js/jquery.js')}}"></script>
 <script type="text/javascript" src="{{url('external/js/dashboard.js')}}"></script>
 <script type="text/javascript" src="{{url('external/js/hits.js')}}"></script>
