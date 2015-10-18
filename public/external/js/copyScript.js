@@ -15,4 +15,4 @@ function confirmExit()
     window.location.href='index.html';
     return true;
 }
-window.onbeforeunload = confirmExit;
+//window.onbeforeunload = confirmExit;
