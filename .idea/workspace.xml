@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="289d4e9f-1afb-4af0-8910-0118e28f27cd" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php" afterPath="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ucut.iws" />
@@ -79,22 +80,12 @@
       <file leaf-file-name="dashboard.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/User/dashboard.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.769231">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state vertical-scroll-proportion="-15.038462">
+              <caret line="23" column="80" selection-start-line="23" selection-start-column="80" selection-end-line="23" selection-end-column="80" />
               <folding>
                 <element signature="n#style#0;n#ul#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileViewFinder.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/View/FileViewFinder.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-21.076923">
-              <caret line="242" column="5" selection-start-line="242" selection-start-column="5" selection-end-line="242" selection-end-column="5" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -112,8 +103,8 @@
       <file leaf-file-name="AuthenticatesUsers.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5670103">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.58419245">
+              <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -240,28 +231,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ucut" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ucut" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="User" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -432,7 +401,7 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="getlogin&#9;null&#9;null&#10;helper.php&#9;FILE&#9;file://C:/xampp/htdocs/ucut/vendor/symfony/console/Helper/Helper.php&#10;fileview&#9;null&#9;null&#10;login&#9;null&#9;null&#10;rout&#9;FILE&#9;file://C:/xampp/htdocs/ucut/app/Http/routes.php&#10;authc&#9;FILE&#9;file://C:/xampp/htdocs/ucut/app/Http/Controllers/Auth/AuthController.php&#10;auth&#9;FILE&#9;file://C:/xampp/htdocs/ucut/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php&#10;auth.&#9;FILE&#9;file://C:/xampp/htdocs/ucut/config/auth.php&#10;das&#9;FILE&#9;file://C:/xampp/htdocs/ucut/resources/views/User/dashboard.blade.php&#10;dash&#9;FILE&#9;file://C:/xampp/htdocs/ucut/resources/views/User/dashboard.blade.php&#10;main&#9;FILE&#9;file://C:/xampp/htdocs/ucut/app/Http/Controllers/MainController.php&#10;url&#9;FILE&#9;file://C:/xampp/htdocs/ucut/app/Http/Controllers/UrlController.php&#10;BaseContr&#9;null&#9;null&#10;controller&#9;FILE&#9;file://C:/xampp/htdocs/ucut/app/Http/Controllers/Controller.php&#10;base con&#9;null&#9;null&#10;contr&#9;FILE&#9;file://C:/xampp/htdocs/ucut/app/Http/Controllers/Controller.php&#10;user&#9;FILE&#9;file://C:/xampp/htdocs/ucut/vendor/laravel/framework/src/Illuminate/Foundation/Auth/RegistersUsers.php&#10;au&#9;FILE&#9;file://C:/xampp/htdocs/ucut/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php&#10;response.ph&#9;FILE&#9;file://C:/xampp/htdocs/ucut/vendor/symfony/http-foundation/Response.php&#10;hea&#9;FILE&#9;file://C:/xampp/htdocs/ucut/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Header.php&#10;redirect&#9;FILE&#9;file://C:/xampp/htdocs/ucut/vendor/laravel/framework/src/Illuminate/Foundation/Auth/RedirectsUsers.php&#10;rou&#9;FILE&#9;file://C:/xampp/htdocs/ucut/app/Http/routes.php&#10;redirectus&#9;null&#9;null&#10;postreg&#9;null&#9;null&#10;authre&#9;null&#9;null&#10;database&#9;FILE&#9;file://C:/xampp/htdocs/ucut/config/database.php&#10;databse.php&#9;FILE&#9;file://C:/xampp/htdocs/ucut/database/seeds/DatabaseSeeder.php&#10;routes&#9;FILE&#9;file://C:/xampp/htdocs/ucut/app/Http/routes.php" />
+    <property name="SearchEverywhereHistoryKey" value="authe&#9;FILE&#9;file://C:/xampp/htdocs/ucut/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php&#10;viewfinder&#9;FILE&#9;file://C:/xampp/htdocs/ucut/vendor/laravel/framework/src/Illuminate/View/FileViewFinder.php&#10;getlogin&#9;null&#9;null&#10;helper.php&#9;FILE&#9;file://C:/xampp/htdocs/ucut/vendor/symfony/console/Helper/Helper.php&#10;fileview&#9;null&#9;null&#10;login&#9;null&#9;null&#10;rout&#9;FILE&#9;file://C:/xampp/htdocs/ucut/app/Http/routes.php&#10;authc&#9;FILE&#9;file://C:/xampp/htdocs/ucut/app/Http/Controllers/Auth/AuthController.php&#10;auth&#9;FILE&#9;file://C:/xampp/htdocs/ucut/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php&#10;auth.&#9;FILE&#9;file://C:/xampp/htdocs/ucut/config/auth.php&#10;das&#9;FILE&#9;file://C:/xampp/htdocs/ucut/resources/views/User/dashboard.blade.php&#10;dash&#9;FILE&#9;file://C:/xampp/htdocs/ucut/resources/views/User/dashboard.blade.php&#10;main&#9;FILE&#9;file://C:/xampp/htdocs/ucut/app/Http/Controllers/MainController.php&#10;url&#9;FILE&#9;file://C:/xampp/htdocs/ucut/app/Http/Controllers/UrlController.php&#10;BaseContr&#9;null&#9;null&#10;controller&#9;FILE&#9;file://C:/xampp/htdocs/ucut/app/Http/Controllers/Controller.php&#10;base con&#9;null&#9;null&#10;contr&#9;FILE&#9;file://C:/xampp/htdocs/ucut/app/Http/Controllers/Controller.php&#10;user&#9;FILE&#9;file://C:/xampp/htdocs/ucut/vendor/laravel/framework/src/Illuminate/Foundation/Auth/RegistersUsers.php&#10;au&#9;FILE&#9;file://C:/xampp/htdocs/ucut/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php&#10;response.ph&#9;FILE&#9;file://C:/xampp/htdocs/ucut/vendor/symfony/http-foundation/Response.php&#10;hea&#9;FILE&#9;file://C:/xampp/htdocs/ucut/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Header.php&#10;redirect&#9;FILE&#9;file://C:/xampp/htdocs/ucut/vendor/laravel/framework/src/Illuminate/Foundation/Auth/RedirectsUsers.php&#10;rou&#9;FILE&#9;file://C:/xampp/htdocs/ucut/app/Http/routes.php&#10;redirectus&#9;null&#9;null&#10;postreg&#9;null&#9;null&#10;authre&#9;null&#9;null&#10;database&#9;FILE&#9;file://C:/xampp/htdocs/ucut/config/database.php&#10;databse.php&#9;FILE&#9;file://C:/xampp/htdocs/ucut/database/seeds/DatabaseSeeder.php&#10;routes&#9;FILE&#9;file://C:/xampp/htdocs/ucut/app/Http/routes.php" />
     <property name="JavaScriptLanguageLevel" value="JSX" />
     <property name="FullScreen" value="false" />
   </component>
@@ -483,7 +452,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -875,29 +844,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/User/dashboard.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.769231">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#ul#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/console/Helper/Helper.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.9415808">
           <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/View/FileViewFinder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.076923">
-          <caret line="242" column="5" selection-start-line="242" selection-start-column="5" selection-end-line="242" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -918,10 +868,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/View/FileViewFinder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/User/dashboard.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.038462">
+          <caret line="23" column="80" selection-start-line="23" selection-start-column="80" selection-end-line="23" selection-end-column="80" />
+          <folding>
+            <element signature="n#style#0;n#ul#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5670103">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.58419245">
+          <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
           <folding />
         </state>
       </provider>

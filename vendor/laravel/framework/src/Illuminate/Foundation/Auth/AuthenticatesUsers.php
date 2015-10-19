@@ -20,8 +20,8 @@ trait AuthenticatesUsers
 //        if (view()->exists('auth.authenticate')) {
 //            return view('auth.authenticate');
 //        }
-
-        return view('User.login');
+     return view('master');
+        //return view('User.login');
     }
 
     /**
