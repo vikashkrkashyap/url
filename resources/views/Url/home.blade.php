@@ -16,6 +16,6 @@
 
 </div>
 <script type="text/javascript" src ="{{url('external/js/ajaxHomeUrl.js')}}"></script>
-<script type="text/javascript" src ="{{url('external/js/copyScript.js')}}"></script>
+
 
 @endsection

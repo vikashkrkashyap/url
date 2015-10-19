@@ -42,9 +42,18 @@ class MainController extends Controller
 
     public function RandomControl()
     {
-        $random_digit_length = 11;
+        $random_digit_length = 15;
 
         $data = DB::table('keys')->lists('id');
+
+        //Displaying the random key for
+        if(count($data)== 0){
+           $first_key = str_random(2);
+            return $first_key;
+        }
+
+        //Displaying the random number
+
         $unique_id = last($data);
         $max = 0;
         $min = 0;

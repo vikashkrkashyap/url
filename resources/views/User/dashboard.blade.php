@@ -18,12 +18,16 @@
 <div class="list">
 
     <ul style="float: left; width:300px;height:100%;">
-@foreach($url_data as $url)
-    <li><a id="show_hits">
-        <p>{{$url->url}} </p>
-         <p> {{'http//ucut.herokuapps.com/'.$url->key}}</p><br><hr>
 
-         </a>
+@foreach($url_data as $url)
+
+        <input type="hidden" name="url_hits_id" value="{{url('dashboard'.'/'.$url->id)}}">
+    <li>
+        <a class="show_hits" onclick="submit({{url('dashboard'.'/'.$url->id)}});">
+             <p>{{$url->url}} </p>
+             <p> {{'http//ucut.herokuapps.com/'.$url->key}}</p><br><hr>
+
+        </a>
     </li>
 
 @endforeach
@@ -35,7 +39,7 @@
 </div>
 
 <script type="text/javascript" src="{{url('external/js/jquery.js')}}"></script>
-<script type="text/javascript" src="{{url('external/js/dashboard.js')}}"></script>
+<script type="text/javascript" src="{{url('external/js/dashboardUrlAjax.js')}}"></script>
 <script type="text/javascript" src="{{url('external/js/hits.js')}}"></script>
 </body>
 </html>

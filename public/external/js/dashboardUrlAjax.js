@@ -9,7 +9,7 @@ $(document).ready(function (){
         var route = $('#urlForm').attr('action');
 
         var token = $('input[name="_token"]').attr('value');
-        console.log(data +'user_id='+ data1 +route+'csrf= '+token);
+        //  console.log(data +'user_id='+ data1 +route+'csrf= '+token);
 
         $.ajax({
             url:route,

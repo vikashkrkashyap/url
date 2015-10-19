@@ -18,6 +18,8 @@ class UrlController extends MainController
     {
         $url = $request->input('input_data');
         $title = "Uct | Cut Your url";
+
+
         return view('Url.home', compact('title','url'));
     }
 
@@ -38,15 +40,24 @@ class UrlController extends MainController
             $data->ip = $request->getClientIp();
             $data->save();
 
-            //display the result
+            //checking the url repetition and if repeated then returning the old one
 
+            if($this->checkUrlRepetition($url))
+            {
+                $repeated_key = DB::table('keys')->where('keys.url','=',$url)->value('key');
 
-            $full_url = "http://ucut.herokuapp.com/" . $key;
+                $full_url = "http://ucut.herokuapp.com/" . $repeated_key;
+
+            }
+            else{
+                $full_url = "http://ucut.herokuapp.com/" . $key;
+            }
 
             return response()->json([
                 'message' => 'created',
                 'url' => $full_url
-            ]);
+              ]);
+
         }
 
 
