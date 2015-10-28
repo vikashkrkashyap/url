@@ -73,8 +73,10 @@ class UrlController extends MainController
             $data = new Hit;
             $data->url_ip = $request->getClientIp();
             $data->url_id = $link[0]->id;
-             $data->save();
-            return redirect($link[0]->url);
+            $data->save();
+            $test =app('Illuminate\Routing\UrlGenerator')->previous();
+            return $test;
+            //return redirect($link[0]->url);
         }
         else{
             return redirect('/');

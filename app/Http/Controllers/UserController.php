@@ -47,15 +47,16 @@ class UserController extends MainController
             //checking the url repetition and if repeated then returning the old key
 
 
-          if($this->checkUrlRepetition($url)) {
+            if($this->checkUrlRepetition($url))
+            {
+                $repeated_key = DB::table('keys')->where('keys.url','=',$url)->value('key');
 
-              $repeated_key = DB::table('keys')->where('keys.url','=',$url)->select('key')->first()->get();
+                $full_url = "http://ucut.herokuapp.com/" . $repeated_key;
 
-              $full_url = "http://ucut.herokuapp.com/" . $repeated_key;
-          }
-          else {
-              $full_url = "http://ucut.herokuapp.com/" . $key;
-          }
+            }
+            else{
+                $full_url = "http://ucut.herokuapp.com/" . $key;
+            }
             return response()->json([
                 'message' => 'successful',
                 'url' => $full_url
