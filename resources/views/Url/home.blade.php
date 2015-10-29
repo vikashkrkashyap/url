@@ -20,6 +20,7 @@
 
 <body>
 
+
 <div id="preloader">
     <div id="status">
         <img src="{{url('template/images/preloader.gif')}}" height="64" width="64" alt="">
@@ -75,22 +76,22 @@
                 </form>
                 <div id="container" style="margin-left:15.5%;">
                 <div id="msg" style="margin-left:10px;margin-top:10px;font-size:17px;float:left"></div>
-               <button id="copy" onclick="copyToClipboard('#msg')"
+               <!--<button id="copy" onclick="copyToClipboard('#msg')"
                        style="width:60px;height:30px;padding:5px 7px;display:none;float:left;margin:10px 7px;">Copy</button>
-                    </div>
+                   --> </div>
             </div>
 
 
             </div>
 
           <ul class="social">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://www.facebook.com/ucutindia/"><i class="fa fa-facebook"></i></a></li>
+              <!--  <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                 <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                 <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                 <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                 <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                <li><a href="#"><i class="fa fa-skype"></i></a></li>-->
             </ul>
 
         </div>
