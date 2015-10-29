@@ -15,7 +15,7 @@
 
 <hr>
 <input type="hidden" id="url" value="{{url('hits')}}">
-<div class="list">
+< class="list">
 
     <ul style="float: left; width:300px;height:100%;">
 
@@ -33,11 +33,11 @@
 @endforeach
     </ul>
 
+
+
     <div id ="right" style="float:left">
 
     </div>
-</div>
-
 <script type="text/javascript" src="{{url('external/js/jquery.js')}}"></script>
 <script type="text/javascript" src="{{url('external/js/dashboardUrlAjax.js')}}"></script>
 <script type="text/javascript" src="{{url('external/js/hits.js')}}"></script>

@@ -71,12 +71,19 @@ class UserController extends MainController
     //$hits = DB::table('hits')->where('url_id','=','keys.id')->get();
 
       $url = Key::findOrFail($id);
-      $url_id=$request->input('hits_url_id');
+      //$url_id=$request->input('hits_url_id');
       $hits = DB::table('hits')->where('hits.url_id','=',$url->id)->count();
 
-      return view('User.hits',compact('url','hits'));
+         $url_stats = DB::table('Redirected_websites')
+          ->where('Redirected_websites.url_id','=',$url->id)
+          ->where('Redirected_websites.user_id','=',Auth::user()->id)->get();
+
+
+     return view('User.hits',compact('url','hits','url_stats'));
 
   }
+
+
 
 
 }

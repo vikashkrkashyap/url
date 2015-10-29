@@ -7,7 +7,7 @@ $(document).ready(function (){
 
         var data = $('input[name=input_data]').val();
         var data1 = $('input[name=user_id]').val();
-        var route = $('#urlForm').attr('action');
+        var route = $('#mc-embedded-subscribe-form').attr('action');
 
         var token = $('input[name="_token"]').attr('value');
 
@@ -31,8 +31,14 @@ $(document).ready(function (){
        });
 
 
-
-
-
     });
+
+
+    function copyToClipboard(element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+    }
 });

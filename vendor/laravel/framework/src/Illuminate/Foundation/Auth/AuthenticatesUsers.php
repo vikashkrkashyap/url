@@ -21,7 +21,7 @@ trait AuthenticatesUsers
 //            return view('auth.authenticate');
 //        }
 
-        return view('User.login');
+        return view('auth.login');
     }
 
     /**

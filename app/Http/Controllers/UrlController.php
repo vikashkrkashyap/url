@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Hit;
 use App\Key;
+use App\Redirected_websites;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -75,7 +76,18 @@ class UrlController extends MainController
             $data->url_id = $link[0]->id;
             $data->save();
             $test =app('Illuminate\Routing\UrlGenerator')->previous();
-            //return $test;
+
+            if(Auth::user())
+            {
+                $website_hits = new Redirected_websites;
+                $website_hits->user_id = Auth::user()->id;
+                $website_hits->url_id = $link[0]->id;
+                $website_hits->website_url = $test;
+                $website_hits->website_name = 'example.com';
+
+                $website_hits->save();
+
+            }
             return redirect($link[0]->url);
         }
         else{
