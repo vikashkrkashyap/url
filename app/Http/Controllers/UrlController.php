@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Hit;
 use App\Key;
 use App\Redirected_websites;
+use App\website_detail;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -22,6 +23,7 @@ class UrlController extends MainController
 
 
         return view('Url.home', compact('title','url'));
+
     }
 
     //saving the data in database
@@ -79,15 +81,37 @@ class UrlController extends MainController
 
             if(Auth::user())
             {
+                $name = $this->get_website_name($test);
                 $website_hits = new Redirected_websites;
                 $website_hits->user_id = Auth::user()->id;
                 $website_hits->url_id = $link[0]->id;
                 $website_hits->website_url = $test;
-                $website_hits->website_name = 'example.com';
+                $website_hits->website_name = $name;
 
                 $website_hits->save();
 
+                $website_details = new website_detail;
+
+
+
+                $name_exists = DB::table('website_details')->lists('name');
+
+                if(in_array($name,$name_exists))
+                {
+
+                    if($name == 't.co')
+                    {
+                        $name = 'twitter.com';
+                    }
+                    $website_details->name = $name;
+                    $website_details->logo = 'suji hai';
+
+                    $website_details->save();
+
+                }
+
             }
+
             return redirect($link[0]->url);
         }
         else{
@@ -97,4 +121,27 @@ class UrlController extends MainController
 
 
     }
+
+    public function get_website_name($string)
+    {
+
+        if(str_contains($string,'https'))
+        {
+
+            preg_match('@^(?:https://)?([^/]+)@i', $string, $matches);
+        }
+        else
+        {
+            preg_match('@^(?:http://)?([^/]+)@i', $string, $matches);
+        }
+        $host = $matches[1];
+
+        // get last two segments of host name
+        preg_match('/[^.]+\.[^.]+$/', $host, $matches);
+
+         return $matches[0];
+
+    }
+
+
 }
