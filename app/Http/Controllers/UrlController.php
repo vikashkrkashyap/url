@@ -62,11 +62,11 @@ class UrlController extends MainController
             {
                 $repeated_key = DB::table('keys')->where('keys.url','=',$url)->value('key');
 
-                $full_url = "http://ucut.herokuapp.com/" . $repeated_key;
+                $full_url = "http://ucut.in/" . $repeated_key;
 
             }
             else{
-                $full_url = "http://ucut.herokuapp.com/" . $key;
+                $full_url = "http://ucut.in.com/" . $key;
             }
 
             return response()->json([
