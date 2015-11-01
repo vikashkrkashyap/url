@@ -12,6 +12,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Validation\Validator;
 
 class UrlController extends MainController
 {
@@ -30,7 +31,19 @@ class UrlController extends MainController
 
     public function show(Request $request)
     {
+
+//        $validator =  Validator::make($request->all(), ['input_data'=>'required|email']);
+//
+//        if($validator->fails())
+//        {
+//            return redirect()->back()
+//                ->withErrors($validator)
+//                ->withInput();
+//
+//        }
+
         $url = $request->input('input_data');
+
         $key = $this->checkKeyRepetition();
 
 

@@ -25,6 +25,8 @@
     <div id="status">
         <img src="{{url('template/images/preloader.gif')}}" height="64" width="64" alt="">
     </div>
+
+
 </div>
 
 <!-- Intro Section ================================================== -->
@@ -61,6 +63,15 @@
 
 
             <div id="mc_embed_signup">
+
+                @if(count($errors)>0)
+
+                    <ul style ="color:orangered">
+                        @foreach($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                @endif
                 <form action="{{url('show')}}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"  novalidate>
                     {!! csrf_field() !!}
 
