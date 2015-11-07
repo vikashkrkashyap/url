@@ -1,9 +1,11 @@
-
+@extends('User.dashboard')
+@section('hits')
 <table border="2">
 <tr><th><h1>total hits:{{$hits}}</h1></th></tr>
-    @foreach($url_stats as $website_hits)
+    @foreach($items as $item)
         <tr>
-            <td> {{$website_hits->website_url}}</td>
+            <td> {{$item}}</td>
         </tr>
     @endforeach
 </table>
+    @endsection

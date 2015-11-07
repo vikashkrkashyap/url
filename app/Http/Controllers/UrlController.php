@@ -32,16 +32,7 @@ class UrlController extends MainController
     public function show(Request $request)
     {
 
-//        $validator =  Validator::make($request->all(), ['input_data'=>'required|email']);
 //
-//        if($validator->fails())
-//        {
-//            return redirect()->back()
-//                ->withErrors($validator)
-//                ->withInput();
-//
-//        }
-
         $url = $request->input('input_data');
 
         $key = $this->checkKeyRepetition();
@@ -66,7 +57,7 @@ class UrlController extends MainController
 
             }
             else{
-                $full_url = "http://ucut.in.com/" . $key;
+                $full_url = "http://ucut.in/" . $key;
             }
 
             return response()->json([

@@ -25,7 +25,8 @@
     <li>
         <a class="show_hits" onclick="submit({{url('dashboard'.'/'.$url->id)}});">
              <p>{{$url->url}} </p>
-             <p> {{'http//ucut.herokuapps.com/'.$url->key}}</p><br><hr>
+             <p> <a href="http://www.ucut.in/dashboard/{{$url->id}}">{{'http//ucut.in/'.$url->key}}</a></p><br>
+
 
         </a>
     </li>
@@ -36,7 +37,7 @@
 
 
     <div id ="right" style="float:left">
-
+     @yield('hits');
     </div>
 <script type="text/javascript" src="{{url('external/js/jquery.js')}}"></script>
 <script type="text/javascript" src="{{url('external/js/dashboardUrlAjax.js')}}"></script>

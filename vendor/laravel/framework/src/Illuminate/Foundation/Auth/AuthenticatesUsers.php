@@ -17,9 +17,9 @@ trait AuthenticatesUsers
      */
     public function getLogin()
     {
-//        if (view()->exists('auth.authenticate')) {
-//            return view('auth.authenticate');
-//        }
+        if (view()->exists('auth.authenticate')) {
+            return view('auth.authenticate');
+        }
 
         return view('auth.login');
     }
@@ -83,7 +83,6 @@ trait AuthenticatesUsers
         }
 
         return redirect()->intended($this->redirectPath());
-
     }
 
     /**
@@ -105,8 +104,8 @@ trait AuthenticatesUsers
     protected function getFailedLoginMessage()
     {
         return Lang::has('auth.failed')
-            ? Lang::get('auth.failed')
-            : 'These credentials do not match our records.';
+                ? Lang::get('auth.failed')
+                : 'These credentials do not match our records.';
     }
 
     /**
@@ -126,7 +125,10 @@ trait AuthenticatesUsers
      *
      * @return string
      */
-
+    public function loginPath()
+    {
+        return property_exists($this, 'loginPath') ? $this->loginPath : '/auth/login';
+    }
 
     /**
      * Get the login username to be used by the controller.

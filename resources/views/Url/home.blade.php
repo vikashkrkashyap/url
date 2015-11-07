@@ -38,7 +38,7 @@
             <h2 style="color:#fff;"> Ucut.in </h2>
         </div>
 
-        <nav id="nav-wrap">
+      <!--  <nav id="nav-wrap">
 
             <a class="menu-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
             <a class="menu-btn" href="#" title="Hide navigation">Hide navigation</a>
@@ -49,7 +49,8 @@
                 <li><a class="smoothscroll" href="#Features">Features</a></li>
             </ul> <!-- end #nav -->
 
-        </nav> <!-- end #nav-wrap -->
+        </nav>
+
 
     </header> <!-- Header End -->
 
@@ -72,10 +73,12 @@
                         @endforeach
                     </ul>
                 @endif
-                <form action="{{url('show')}}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"  novalidate>
+                <form action="{{url('show')}}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"   novalidate>
                     {!! csrf_field() !!}
 
-                    <input type="url" name="input_data"  id="mce-EMAIL" placeholder="URL Please" required="required">
+                    <input type="url" name="input_data"  id="mce-EMAIL" placeholder="URL Please"
+                           autocomplete="off" autocorrect="off"
+                           required >
                     <input type="hidden" value="1" name="user_id">
                     <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                     <div style="position: absolute; left: -5000px;">
@@ -97,12 +100,13 @@
 
           <ul class="social">
                 <li><a href="https://www.facebook.com/ucutindia/"><i class="fa fa-facebook"></i></a></li>
-              <!--  <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                <li><a href="#"><i class="fa fa-skype"></i></a></li>-->
+               <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              <!--  <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+
+               <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+               <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+               <li><a href="#"><i class="fa fa-skype"></i></a></li>-->
             </ul>
 
         </div>
@@ -145,6 +149,26 @@
 <script src="{{url('template/js/jquery.placeholder.js')}}"></script>
 <script src="{{url('template/js/backstretch.js')}}"></script>
 <script src="{{url('template/js/init.js')}}"></script>
+
+<script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+<script>
+    // just for the demos, avoids form submit
+    jQuery.validator.setDefaults({
+        debug: true,
+        success: "valid"
+    });
+    $( "#mc-embedded-subscribe-form" ).validate({
+        errorClass: 'customErrorClass',
+        rules: {
+            input_data: {
+                required: true,
+                url: true
+            },
+        }
+    });
+
+</script>
 
 
 </body>

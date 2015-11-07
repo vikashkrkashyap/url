@@ -95,7 +95,13 @@ canvas,
 video {
    display: inline-block;
 }
-
+.error{
+   border: 2px solid red;
+}
+.valid{
+   border-color: green;
+   border-radius:1px;
+}
 audio:not([controls]) {
    display: none;
    height: 0;
