@@ -8,7 +8,6 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Torann\GeoIP;
 
 class UserController extends MainController
 {
@@ -73,10 +72,10 @@ class UserController extends MainController
 
       $url = Key::findOrFail($id);
       //$url_id=$request->input('hits_url_id');
-      $hits = DB::table('hits')->where('hits.url_id','=',$url->id)->count();
+      $hits = Hit::where('url_id',$url->id)->count();
       $hits_ip = $hits = DB::table('hits')->where('hits.url_id','=',$url->id)->select('url_ip')->get();
 
-      $location = GeoIP\GeoIPFacade::getLocation('202.142.95.90');
+     // $location = GeoIP\GeoIPFacade::getLocation('202.142.95.90');
 
 
 
@@ -97,6 +96,7 @@ class UserController extends MainController
           $items[] = $item;
       }
 
-     return view('User.hits',compact('url','hits','url_stats','items'
+     return view('User.hits',compact('url','hits','url_stats','items'));
 
+}
 }
