@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Torann\GeoIP\GeoIPFacade;
+//use Torann\GeoIP\GeoIPFacade;
 
 
 class UserController extends MainController
@@ -88,17 +88,13 @@ class UserController extends MainController
           ->where('Redirected_websites.user_id','=',Auth::user()->id)->groupBy('website_name')->distinct()->get();
 
       $items = array();
-      $locations =array();
-
-//location
-      foreach($hits as $hit)
-      {
-
-
-          $location[] = GeoIPFacade::getLocation($hit);
-
-
-      }
+//      $locations =array();
+//
+////location
+//      foreach($hits as $hit)
+//      {
+//          $location[] = GeoIPFacade::getLocation($hit);
+//      }
 
 
 
