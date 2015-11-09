@@ -8,12 +8,16 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Torann\GeoIP\GeoIPFacade;
+
 
 class UserController extends MainController
 {
     public function __construct()
     {
         $this->middleware('auth');
+
+
     }
 
 
@@ -71,22 +75,34 @@ class UserController extends MainController
     //$hits = DB::table('hits')->where('url_id','=','keys.id')->get();
 
       $url = Key::findOrFail($id);
-      //$url_id=$request->input('hits_url_id');
+
       $hits = Hit::where('url_id',$url->id)->count();
       $hits_ip = $hits = DB::table('hits')->where('hits.url_id','=',$url->id)->select('url_ip')->get();
 
-     // $location = GeoIP\GeoIPFacade::getLocation('202.142.95.90');
+      $total_hit =count($hits);
+      //return $location;
 
-
-
-
-//return $location;
 
          $url_stats = DB::table('Redirected_websites')
           ->where('Redirected_websites.url_id','=',$url->id)
           ->where('Redirected_websites.user_id','=',Auth::user()->id)->groupBy('website_name')->distinct()->get();
 
       $items = array();
+      $locations =array();
+
+//location
+      foreach($hits as $hit)
+      {
+
+
+          $location[] = GeoIPFacade::getLocation($hit);
+
+
+      }
+
+
+
+
 
       foreach($url_stats as $url_count)
       {
@@ -94,9 +110,11 @@ class UserController extends MainController
                          ->where('Redirected_websites.website_name','=',$url_count->website_name)->count();
           $item = $url_count->website_name.'  '.$lol;
           $items[] = $item;
+
       }
 
-     return view('User.hits',compact('url','hits','url_stats','items'));
+
+      return view('User.hits',compact('url','total_hit','url_stats','items'));
 
 }
 }

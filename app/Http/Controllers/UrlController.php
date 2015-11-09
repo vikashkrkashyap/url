@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Validation\Validator;
+use hisorange\BrowserDetect\Facade\parser;
 
 class UrlController extends MainController
 {
@@ -100,7 +101,7 @@ class UrlController extends MainController
 
                 $name_exists = DB::table('website_details')->lists('name');
 
-                if(in_array($name,$name_exists))
+                if(!in_array($name,$name_exists))
                 {
 
                     if($name == 't.co')
@@ -116,9 +117,37 @@ class UrlController extends MainController
 
             }
 
-            return redirect($link[0]->url);
+            //Deep linking
+
+
+                if(parser::isMobile())
+                {
+                    if(parser::osFamily() == 'Apple iOS')
+                    {
+                        //link for apple store
+                    }
+                    elseif(parser::osFamily() == 'Windows')
+                    {
+                        //link for windows store
+                    }
+                    elseif(parser::osFamily() == 'Blackberry')
+                    {
+                        //link for blackberry store
+                    }
+                    elseif(parser::osFamily() == 'Android')
+                    {
+                        return redirect('https://play.google.com/store/apps/details?id=com.facebook.katana&hl=en');
+                    }
+
+
+                 }
+                 else
+                 {
+                     return redirect($link[0]->url);
+                 }
         }
-        else{
+        else
+        {
             return redirect('/');
         }
 
