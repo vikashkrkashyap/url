@@ -144,7 +144,8 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-       // hisorange\BrowserDetect\Provider\BrowserDetectService::class,
+        hisorange\BrowserDetect\Provider\BrowserDetectService::class,
+        Torann\GeoIP\GeoIPServiceProvider::class,
 
     ],
 
@@ -194,8 +195,8 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-
-        //'BrowserDetect' => hisorange\BrowserDetect\Facade\Parser::class,
+        'BrowserDetect' => hisorange\BrowserDetect\Facade\Parser::class,
+        'GeoIP'     => Torann\GeoIP\GeoIPFacade::class,
 
     ],
 
