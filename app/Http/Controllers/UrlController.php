@@ -86,7 +86,8 @@ class UrlController extends MainController
 
             if(Auth::user())
             {
-                $name = $this->get_website_name($test);
+                //$name = $this->get_website_name($test);
+                $name='google.com';
                 $website_hits = new Redirected_websites;
                 $website_hits->user_id = Auth::user()->id;
                 $website_hits->url_id = $link[0]->id;
@@ -128,13 +129,13 @@ class UrlController extends MainController
                     }
                     elseif(parser::osFamily() == 'Windows')
                     {
-                        //link for windows store
+                        return redirect('https://www.microsoft.com/en-us/store/apps/google/9wzdncrfhx3w');
                     }
                     elseif(parser::osFamily() == 'Blackberry')
                     {
                         //link for blackberry store
                     }
-                    elseif(parser::osFamily() == 'Android')
+                    elseif(parser::osFamily() == 'AndroidOS')
                     {
                         return redirect('https://play.google.com/store/apps/details?id=com.facebook.katana&hl=en');
                     }

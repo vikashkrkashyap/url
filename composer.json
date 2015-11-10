@@ -7,8 +7,8 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.1.*",
-        "hisorange/browser-detect": "2.*"
+        "laravel/framework": "5.1.*"
+
 
 
     },
