@@ -36,7 +36,7 @@ class UrlController extends MainController
 //
         $url = $request->input('input_data');
 
-        $key = $this->checkKeyRepetition();
+        $key = $this->getUniqueRandomKey();
 
 
         if ($request->ajax()) {
