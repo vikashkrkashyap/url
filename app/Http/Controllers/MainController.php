@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
@@ -12,7 +13,7 @@ class MainController extends Controller
 
 //function for checking in database whether the random generated number is repeating or not
 
-    public function checkKeyRepetition()
+    public function getUniqueRandomKey()
     {
         $token = DB:: table('keys')->lists('key');
 
@@ -36,8 +37,25 @@ class MainController extends Controller
          }
         else{
             return false;
+
         }
     }
+
+//function Responsible for checking the repeated url in the database by Current User
+
+    public function checkUserUrlRepetition($url)
+    {
+        $data= DB::table('keys')->where('user_id','=',Auth::user()->id)->lists();
+
+        if(in_array($url,$data)){
+
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 //function responsible for minimum digit random number generation
 
     public function RandomControl()

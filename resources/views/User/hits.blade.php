@@ -1,35 +1,39 @@
+<html>
+<head>
+     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
+    <meta charset=utf-8 />
+</head>
 
-<table border="2">
-<tr><th><h1>total hits:{{$total_hit}}</h1></th></tr>
-    @foreach($items as $item)
-        <tr>
-                <td>{{$item}}</td>
+<body><br><br><br>
+<div id="hits" style="height: 250px;width:700px"></div>
+<div id="bar-example"></div>
 
-                <td><a id="show">show-details</a>
-                    <a id="hide">hide-details</a>
-
-                    <p>Hide and seek</p>
-
-
-                </td>
-        </tr>
-    @endforeach
-</table>
-
-
-<script type="text/javascript" src="{{url('external/js/jquery.js')}}"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-    $('p').hide();
-    $("#show").click(function(){
 
-        $('p').show();
+
+    // later on
+
+ jQuery(function(){
+
+
+     $.get("http://localhost:8080/ucut/public/dashboard/3",function(response){
+
+        var data = JSON.parse(response)
+
+     new Morris.Line({
+        element: 'hits',
+        data: data,
+        xkey: 'date',
+        ykeys: ['hits'],
+        labels: ['Hits'],
+         xLabels: 'week',
+         resize: 'true',
     });
-
-    $("#hide").click(function(){
-
-        $('p').hide();
     });
-});
-
+ });
 </script>
+</body>
+</html>

@@ -3,31 +3,38 @@
 namespace App\Http\Controllers;
 use App\Hit;
 use App\Key;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+
 //use Torann\GeoIP\GeoIPFacade;
 
 
 class UserController extends MainController
 {
+
+
+
     public function __construct()
     {
         $this->middleware('auth');
 
 
     }
-
-
-
     //function for showing the dashboard page after login or register
 
     public function showDashboard(Request $request)
     {
 
+
+
            $url_data = DB::table('keys')->where('user_id','=',Auth::user()->id)->get();
+
 
              return view('User.dashboard',compact('url_data'));
 
@@ -37,7 +44,7 @@ class UserController extends MainController
     {
         if ($request->ajax()) {
 
-            $key = $this->checkKeyRepetition();
+            $key = $this->getUniqueRandomKey();
             $url = $request->input('user_url');
 
             $data = new Key;
@@ -76,11 +83,25 @@ class UserController extends MainController
 
       $url = Key::findOrFail($id);
 
-      $hits = Hit::where('url_id',$url->id)->count();
+
+
+      //Hits Vs Time Graph Data
+
+      $hits = Hit::where('url_id',$url->id)->select(DB::raw('date(created_at) as date'), DB::raw('count(id) as hits'))
+          ->groupBy(DB::raw('date(created_at)'))->distinct()->get();
+
+      $hits_data = json_encode($hits);
+
+      return $hits_data;
+
+
+
       $hits_ip = $hits = DB::table('hits')->where('hits.url_id','=',$url->id)->select('url_ip')->get();
 
+
+
       $total_hit =count($hits);
-      //return $location;
+     // return $location;
 
 
          $url_stats = DB::table('Redirected_websites')
@@ -110,7 +131,16 @@ class UserController extends MainController
       }
 
 
-      return view('User.hits',compact('url','total_hit','url_stats','items'));
+     // return view('User.hits',compact('url','hits_data','url_stats','items'));
 
 }
+
+
+
+
+
+    public function getAnalytics()
+    {
+        return view('User.hits');
+    }
 }

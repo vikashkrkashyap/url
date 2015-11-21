@@ -42,3 +42,11 @@ Route::get('/{key}','UrlController@hash');
 Route::post('postAjaxData','UserController@postUrl');
 
 Route::get('dashboard/{id}','UserController@getHits');
+Route::get('analytics/1','UserController@getAnalytics');
+
+//Api Routes
+
+Route::group(['prefix'=>'api/v1'] ,function(){
+
+    Route::resource('dashboard','API\DashboardController');
+});
