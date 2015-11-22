@@ -110,7 +110,7 @@ class DashboardController extends ApiController
 
             if($this->checkUserUrlRepetition($url))
             {
-                $repeated_key = DB::table('keys')->where('keys.url','=',$url)->value('key');
+                $repeated_key = DB::table('keys')->where('keys.url','=',$url)->where('user_id','=',2)->value('key');
 
                 $full_url = "http://ucut.in/" . $repeated_key;
 
@@ -169,13 +169,9 @@ class DashboardController extends ApiController
      */
     public function destroy($id)
     {
-        if(Auth::user()->id)
-        {
-         DB::table('keys')->where();
-        }
+        Key::where('user_id','=', 2)->find('id');
+
+        Key::destroy($id);
     }
-
-
-
 
 }

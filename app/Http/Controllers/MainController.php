@@ -45,7 +45,7 @@ class MainController extends Controller
 
     public function checkUserUrlRepetition($url)
     {
-        $data= DB::table('keys')->where('user_id','=',Auth::user()->id)->lists();
+        $data= DB::table('keys')->where('user_id','=',2)->lists('url');
 
         if(in_array($url,$data)){
 
