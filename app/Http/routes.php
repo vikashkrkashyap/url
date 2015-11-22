@@ -49,4 +49,5 @@ Route::get('analytics/1','UserController@getAnalytics');
 Route::group(['prefix'=>'api/v1'] ,function(){
 
     Route::resource('dashboard','API\DashboardController');
+    Route::resource('analytics','Api\AnalyticsController');
 });
