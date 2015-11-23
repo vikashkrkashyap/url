@@ -79,89 +79,75 @@ class UrlController extends MainController
     {
         $link = DB::table('keys')->where('key', '=', $key)->get();
 
-        if($link) {
+        if ($link) {
 
-            $current_ip =$request->getClientIp();
+            $current_ip = $request->getClientIp();
             $data = new Hit;
             $data->url_ip = $current_ip;
             $data->url_id = $link[0]->id;
             $data->save();
-            $test =app('Illuminate\Routing\UrlGenerator')->previous();
+            $test = app('Illuminate\Routing\UrlGenerator')->previous();
 
 
-               // $name = $this->get_title($test);
-            $name="test.com";
-                $location = GeoIPFacade::getLocation('202.142.69.126');
+            // $name = $this->get_title($test);
+            $name = 'google.com';
+            $location = GeoIPFacade::getLocation('202.142.69.126');
             //City data
-
+            if(!City::where('city_name',$location['city'])->count()){
                 $city = new City;
-                $city->city_name =$location['city'];
+                $city->city_name = $location['city'];
                 $city->save();
+            }
 
             //Country Data
-                $country =new Country;
+            if(!Country::where('country_name',$location['country'])->count()){
+                $country = new Country;
                 $country->country_name = $location['country'];
                 $country->save();
+            }
 
-            $city_id = DB::table('cities')->where('city_name','=',$location['city'])->value('id');
-            $country_id = DB::table('countries')->where('country_name','=',$location['country'])->value('id');
+            $city_id = DB::table('cities')->where('city_name', '=', $location['city'])->value('id');
+            $country_id = DB::table('countries')->where('country_name', '=', $location['country'])->value('id');
 
 
             //Redirected Website data
-                $website_hits = new Redirected_websites;
-                $website_hits->user_id ='1';
-                $website_hits->url_id = $link[0]->id;
-                $website_hits->city_id = $city_id;
-                $website_hits->country_id = $country_id;
-                $website_hits->website_url = $test;
-                $website_hits->website_name = $name;
+            $website_hits = new Redirected_websites;
+            $website_hits->user_id = '1';
+            $website_hits->url_id = $link[0]->id;
+            $website_hits->city_id = $city_id;
+            $website_hits->country_id = $country_id;
+            $website_hits->website_url = $test;
+            $website_hits->website_name = $name;
 
 
-                $website_hits->save();
-
-
-
+            $website_hits->save();
 
 
             //Deep linking
 
 
-                if(parser::isMobile())
-                {
-                    if(parser::osFamily() == 'Apple iOS')
-                    {
-                        //link for apple store
-                    }
-                    elseif(parser::osFamily() == 'Windows')
-                    {
-                        return redirect('https://www.microsoft.com/en-us/store/apps/google/9wzdncrfhx3w');
-                    }
-                    elseif(parser::osFamily() == 'Blackberry')
-                    {
-                        //link for blackberry store
-                    }
-                    elseif(parser::osFamily() == 'AndroidOS')
-                    {
-                        return redirect('https://play.google.com/store/apps/details?id=com.facebook.katana&hl=en');
-                    }
+            if (parser::isMobile()) {
+                if (parser::osFamily() == 'Apple iOS') {
+                    //link for apple store
+                } elseif (parser::osFamily() == 'Windows') {
+                    return redirect('https://www.microsoft.com/en-us/store/apps/google/9wzdncrfhx3w');
+                } elseif (parser::osFamily() == 'Blackberry') {
+                    //link for blackberry store
+                } elseif (parser::osFamily() == 'AndroidOS') {
+                    return redirect('https://play.google.com/store/apps/details?id=com.facebook.katana&hl=en');
+                }
 
 
-                 }
-                 else
-                 {
-                     return redirect($link[0]->url);
+            }
 
-                 }
+            return redirect($link[0]->url);
+
+        } else {
+            return 'lauda hua hai';
+            //return redirect('/');
         }
-        else
-        {
-            return redirect('/');
-        }
-
 
 
     }
-
-
 
 }
