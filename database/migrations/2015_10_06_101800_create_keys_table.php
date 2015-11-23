@@ -18,6 +18,7 @@ class CreateKeysTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('key');
             $table->string('ip',50);
+            $table->string('title');
             $table->timestamps();
 
             $table->foreign('user_id')

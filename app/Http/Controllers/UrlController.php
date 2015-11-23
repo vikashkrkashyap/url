@@ -84,8 +84,8 @@ class UrlController extends MainController
             $data->save();
             $test =app('Illuminate\Routing\UrlGenerator')->previous();
 
-            if(Auth::user())
-            {
+//            if(Auth::user())
+//            {
                 //$name = $this->get_website_name($test);
                 $name='google.com';
                 $website_hits = new Redirected_websites;
@@ -96,27 +96,27 @@ class UrlController extends MainController
 
                 $website_hits->save();
 
-                $website_details = new website_detail;
+//                $website_details = new website_detail;
+//
+//
+//
+//                $name_exists = DB::table('website_details')->lists('name');
+//
+//                if(!in_array($name,$name_exists))
+//                {
+//
+//                    if($name == 't.co')
+//                    {
+//                        $name = 'twitter.com';
+//                    }
+//                    $website_details->name = $name;
+//                    $website_details->logo = 'suji hai';
+//
+//                    $website_details->save();
+//
+//                }
 
-
-
-                $name_exists = DB::table('website_details')->lists('name');
-
-                if(!in_array($name,$name_exists))
-                {
-
-                    if($name == 't.co')
-                    {
-                        $name = 'twitter.com';
-                    }
-                    $website_details->name = $name;
-                    $website_details->logo = 'suji hai';
-
-                    $website_details->save();
-
-                }
-
-            }
+//            }
 
             //Deep linking
 
@@ -142,14 +142,14 @@ class UrlController extends MainController
 
 
                  }
-                 else
-                 {
+
                      return redirect($link[0]->url);
-                 }
+
         }
         else
         {
-            return redirect('/');
+            return 'lauda hua hai';
+            //return redirect('/');
         }
 
 

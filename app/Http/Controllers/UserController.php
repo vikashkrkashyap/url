@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\URL;
 
 //use Torann\GeoIP\GeoIPFacade;
 
@@ -33,7 +34,7 @@ class UserController extends MainController
 
 
 
-           $url_data = DB::table('keys')->where('user_id','=',Auth::user()->id)->get();
+           $url_data = DB::table('keys')->where('user_id','=',Auth::user()->id)->orderBy('id','desc')->get();
 
 
              return view('User.dashboard',compact('url_data'));
@@ -52,6 +53,7 @@ class UserController extends MainController
             $data->user_id = $request->input('user_id');
             $data->ip = $request->getClientIp();
             $data->key = $key;
+            $data->title = $this->get_title($url);
             $data->save();
 
 
@@ -62,16 +64,16 @@ class UserController extends MainController
             {
                 $repeated_key = DB::table('keys')->where('keys.url','=',$url)->value('key');
 
-                $full_url = "http://ucut.in/" . $repeated_key;
+                $full_url = URL::to('/').'/'. $repeated_key;
 
             }
             else{
-                $full_url = "http://ucut.in/" . $key;
+                $full_url = URL::to('/').'/'.$key;
             }
             return response()->json([
-                'message' => 'successful',
-                'url' => $full_url
-
+                'sorted_url' => $full_url,
+                'title'=>$data->title,
+                'original_url'=>$url,
             ]);
         }
     }
