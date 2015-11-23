@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Key;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -31,14 +33,7 @@ class MainController extends Controller
     public function checkUrlRepetition($input_url)
     {
         $data = DB::table('keys')->lists('url');
-         if(in_array($input_url,$data)){
-
-             return true;
-         }
-        else{
-            return false;
-
-        }
+        return (in_array($input_url,$data));
     }
 
 //function Responsible for checking the repeated url in the database by Current User
@@ -47,13 +42,8 @@ class MainController extends Controller
     {
         $data= DB::table('keys')->where('user_id','=',2)->lists('url');
 
-        if(in_array($url,$data)){
+        return (in_array($url,$data));
 
-            return true;
-        }
-        else{
-            return false;
-        }
     }
 
 //function responsible for minimum digit random number generation
@@ -90,4 +80,41 @@ class MainController extends Controller
 
     }
 
+    //Check user_id is available or Not
+
+    public function checkUserId($id)
+    {
+        $user_id = User::find($id);
+
+        if($user_id)
+            return true;
+        else
+            return false;
+    }
+
+    //Check url_id is available or not
+
+    public function checkUrlId($id)
+    {
+        $url_id = Key::find($id);
+
+        if($url_id)
+            return true;
+        else
+            return false;
+
+    }
+
+    //function for find the title of the page
+
+    public function get_title($url)
+    {
+        $str = file_get_contents($url);
+        if(strlen($str)>0)
+        {
+            $str = trim(preg_replace('/\s+/', ' ', $str)); // supports line breaks inside <title>
+            preg_match("/\<title\>(.*)\<\/title\>/i",$str,$title); // ignore case
+            return $title[1];
+        }
+    }
 }

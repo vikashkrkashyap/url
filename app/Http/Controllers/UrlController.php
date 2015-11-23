@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\City;
+use App\Country;
 use App\Hit;
 use App\Key;
 use App\Redirected_websites;
@@ -14,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Validation\Validator;
 use hisorange\BrowserDetect\Facade\parser;
+use Torann\GeoIP\GeoIPFacade;
 
 class UrlController extends MainController
 {
@@ -78,45 +81,47 @@ class UrlController extends MainController
 
         if($link) {
 
+            $current_ip =$request->getClientIp();
             $data = new Hit;
-            $data->url_ip = $request->getClientIp();
+            $data->url_ip = $current_ip;
             $data->url_id = $link[0]->id;
             $data->save();
             $test =app('Illuminate\Routing\UrlGenerator')->previous();
 
-            if(Auth::user())
-            {
-                //$name = $this->get_website_name($test);
-                $name='google.com';
+
+               // $name = $this->get_title($test);
+            $name="test.com";
+                $location = GeoIPFacade::getLocation('202.142.69.126');
+            //City data
+
+                $city = new City;
+                $city->city_name =$location['city'];
+                $city->save();
+
+            //Country Data
+                $country =new Country;
+                $country->country_name = $location['country'];
+                $country->save();
+
+            $city_id = DB::table('cities')->where('city_name','=',$location['city'])->value('id');
+            $country_id = DB::table('countries')->where('country_name','=',$location['country'])->value('id');
+
+
+            //Redirected Website data
                 $website_hits = new Redirected_websites;
-                $website_hits->user_id = Auth::user()->id;
+                $website_hits->user_id ='1';
                 $website_hits->url_id = $link[0]->id;
+                $website_hits->city_id = $city_id;
+                $website_hits->country_id = $country_id;
                 $website_hits->website_url = $test;
                 $website_hits->website_name = $name;
 
+
                 $website_hits->save();
 
-                $website_details = new website_detail;
 
 
 
-                $name_exists = DB::table('website_details')->lists('name');
-
-                if(!in_array($name,$name_exists))
-                {
-
-                    if($name == 't.co')
-                    {
-                        $name = 'twitter.com';
-                    }
-                    $website_details->name = $name;
-                    $website_details->logo = 'suji hai';
-
-                    $website_details->save();
-
-                }
-
-            }
 
             //Deep linking
 
@@ -145,6 +150,7 @@ class UrlController extends MainController
                  else
                  {
                      return redirect($link[0]->url);
+
                  }
         }
         else
@@ -156,26 +162,6 @@ class UrlController extends MainController
 
     }
 
-    public function get_website_name($string)
-    {
-
-        if(str_contains($string,'https'))
-        {
-
-            preg_match('@^(?:https://)?([^/]+)@i', $string, $matches);
-        }
-        else
-        {
-            preg_match('@^(?:http://)?([^/]+)@i', $string, $matches);
-        }
-        $host = $matches[1];
-
-        // get last two segments of host name
-        preg_match('/[^.]+\.[^.]+$/', $host, $matches);
-
-         return $matches[0];
-
-    }
 
 
 }

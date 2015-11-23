@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Ucut\Transformers\HitsTransformer;
 
 class AnalyticsController extends ApiController
@@ -31,6 +32,18 @@ class AnalyticsController extends ApiController
 
     public function index()
     {
+        $user_id = Input::get('user_id');
+        $url_id = Input::get('url_id');
+
+
+       if($this->checkUrlId($url_id) AND $this->checkUserId($user_id))
+       {return 'ok';}
+        elseif($this->checkUrlId($url_id) && !$this->checkUserId($user_id))
+        {return 'user nahi h url h';}
+       elseif(!$this->checkUrlId($url_id) && $this->checkUserId($user_id))
+       {return 'user h url nahi h';}
+        else{return 'kuch nahi'; }
+
 
     }
 
@@ -67,7 +80,6 @@ class AnalyticsController extends ApiController
 
         $hits = Hit::where('url_id',$url->id)->select(DB::raw('date(created_at) as date'), DB::raw('count(id) as hits'))
             ->groupBy(DB::raw('date(created_at)'))->distinct()->get();
-
 
         return response()->json([
             'hits_data'=>$this->hitsTransformer->transform($hits),

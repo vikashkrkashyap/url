@@ -13,11 +13,18 @@ class HitsTransformer extends Transformer
 {
     public function transform($hits)
     {
-        return [
+        $arr = [];
+        for($i=0;$i<count($hits);$i++) {
 
-            'Day' => $hits['date'],
-            'Hits'=> $hits['hits'],
-        ];
+            //return count($hits);
+            array_push($arr,
+                [
+                    'Day' => $hits[$i]['date'],
+                    'Hits' => $hits[$i]['hits'],
+                ]);
+        }
+
+        return $arr;
     }
 
 }

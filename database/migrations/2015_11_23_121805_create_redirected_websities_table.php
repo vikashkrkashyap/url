@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRedirectedWebsitesTables extends Migration
+class CreateRedirectedWebsitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,13 @@ class CreateRedirectedWebsitesTables extends Migration
      */
     public function up()
     {
-        Schema::create('Redirected_websites', function (Blueprint $table) {
+        Schema::create('redirected_websites', function (Blueprint $table) {
 
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('url_id')->unsigned();
+            $table->integer('city_id')->unsigned();
+            $table->integer('country_id')->unsigned();
             $table->string('website_url');
             $table->string('website_name');
             $table->timestamps();
@@ -31,6 +33,16 @@ class CreateRedirectedWebsitesTables extends Migration
                 ->on('keys')
                 ->onDelete('cascade');
 
+            $table->foreign('city_id')
+                ->references('id')
+                ->on('cities')
+                ->onDelete('cascade');
+
+            $table->foreign('country_id')
+                ->references('id')
+                ->on('countries')
+                ->onDelete('cascade');
+
         });
 
     }
@@ -41,6 +53,6 @@ class CreateRedirectedWebsitesTables extends Migration
      */
     public function down()
     {
-        Schema::drop('Redirected_websites');
+        Schema::drop('redirected_websites');
     }
 }

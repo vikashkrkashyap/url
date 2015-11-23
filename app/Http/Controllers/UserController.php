@@ -92,7 +92,6 @@ class UserController extends MainController
 
       $hits_data = json_encode($hits);
 
-      return $hits_data;
 
 
 

@@ -43,9 +43,7 @@ class DashboardController extends ApiController
 
         if ($input) {
 
-            $user_id = DB::table('users')->lists('id');
-
-            if(in_array($input,$user_id))
+            if($this->checkUserId($input))
             {
                 $key = Key::where('user_id', '=', $input)->get();
 

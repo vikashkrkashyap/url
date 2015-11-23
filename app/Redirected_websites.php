@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Redirected_websites extends Model
 {
-    protected $table = 'redirected_websites';
+    protected $table = 'Redirected_websites';
 }
