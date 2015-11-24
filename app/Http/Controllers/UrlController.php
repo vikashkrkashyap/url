@@ -6,7 +6,6 @@ use App\Country;
 use App\Hit;
 use App\Key;
 use App\Redirected_websites;
-use App\website_detail;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -90,7 +89,7 @@ class UrlController extends MainController
 
 
                // $name = $this->get_title($test);
-            $name="test.com";
+            $name="twitter.com";
                 $location = GeoIPFacade::getLocation('202.142.69.126');
             //City data
 
@@ -109,7 +108,7 @@ class UrlController extends MainController
 
             //Redirected Website data
                 $website_hits = new Redirected_websites;
-                $website_hits->user_id ='1';
+                $website_hits->user_id =$link[0]->user_id;
                 $website_hits->url_id = $link[0]->id;
                 $website_hits->city_id = $city_id;
                 $website_hits->country_id = $country_id;
@@ -149,6 +148,7 @@ class UrlController extends MainController
                  }
                  else
                  {
+
                      return redirect($link[0]->url);
 
                  }

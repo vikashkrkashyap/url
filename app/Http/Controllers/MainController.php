@@ -40,7 +40,7 @@ class MainController extends Controller
 
     public function checkUserUrlRepetition($url)
     {
-        $data= DB::table('keys')->where('user_id','=',2)->lists('url');
+        $data= DB::table('keys')->where('user_id','=',Auth::user()->id)->lists('url');
 
         return (in_array($url,$data));
 
