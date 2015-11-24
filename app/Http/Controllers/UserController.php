@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\URL;
 class UserController extends MainController
 {
 
-
+    const ALREADY_EXIST = 0;
+    const NEW_VALUE = 1;
 
     public function __construct()
     {
@@ -47,31 +48,35 @@ class UserController extends MainController
 
             $url = $request->input('user_url');
 
+
             if($this->checkUserUrlRepetition($url)) {
                 $key = DB::table('keys')->where('keys.url', '=', $url)->value('key');
+                return response()->json([
+                    'flag'=>self::ALREADY_EXIST,
+                ]);
             }
             else {
 
+
                 $key = $this->getUniqueRandomKey();
-
                 $data = new Key;
-                $data->url = $url;
-                $data->user_id = $request->input('user_id');
-                $data->ip = $request->getClientIp();
-                $data->title= $this->get_title($url);
-                $data->key = $key;
-                $data->save();
+                $_id = $data->insertGetId([
+                    'url'=>$url,
+                    'user_id'=>$request->input('user_id'),
+                    'ip'=>$request->getClientIp(),
+                    'title'=>'No Title',
+                    'key'=>$key
+                ]);
             }
-
-            $id = Key::where('key',$key)->select('id')->get();
-
                 $full_url = URL::to('/').'/'. $key;
             }
 
             return response()->json([
+                '_id'=>$_id,
                 'sorted_url' => $full_url,
-                'title'=>$data->title,
+                'title'=>'Retriving...',
                 'original_url'=>$url,
+                'flag'=>self::NEW_VALUE
             ]);
     }
 
@@ -112,12 +117,14 @@ class UserController extends MainController
 
 }
 
-
-
-
-
     public function getAnalytics()
     {
         return view('User.hits');
+    }
+    public function updateUrlTitle(Request $request){
+        $keys = Key::find($request->id);
+        $keys->title = $this->get_title($request->link);
+        $keys->update();
+        return $keys->title;
     }
 }

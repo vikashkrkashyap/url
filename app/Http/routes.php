@@ -40,9 +40,12 @@ Route::get('/{key}','UrlController@hash');
 //after login
 
 Route::post('postAjaxData','UserController@postUrl');
-
 Route::get('dashboard/{id}','UserController@getHits');
 Route::get('analytics/1','UserController@getAnalytics');
+Route::post('update_url_title',[
+    'uses'=>'UserController@updateUrlTitle',
+    'as'=>'update_url_title'
+]);
 
 //Api Routes
 
