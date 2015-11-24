@@ -6,7 +6,6 @@ use App\Country;
 use App\Hit;
 use App\Key;
 use App\Redirected_websites;
-use App\website_detail;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -89,6 +88,7 @@ class UrlController extends MainController
             $test = app('Illuminate\Routing\UrlGenerator')->previous();
 
 
+
             // $name = $this->get_title($test);
             $name = 'google.com';
             $location = GeoIPFacade::getLocation('202.142.69.126');
@@ -111,13 +111,14 @@ class UrlController extends MainController
 
 
             //Redirected Website data
-            $website_hits = new Redirected_websites;
-            $website_hits->user_id = '1';
-            $website_hits->url_id = $link[0]->id;
-            $website_hits->city_id = $city_id;
-            $website_hits->country_id = $country_id;
-            $website_hits->website_url = $test;
-            $website_hits->website_name = $name;
+
+                $website_hits = new Redirected_websites;
+                $website_hits->user_id =$link[0]->user_id;
+                $website_hits->url_id = $link[0]->id;
+                $website_hits->city_id = $city_id;
+                $website_hits->country_id = $country_id;
+                $website_hits->website_url = $test;
+                $website_hits->website_name = $name;
 
 
             $website_hits->save();
@@ -140,14 +141,36 @@ class UrlController extends MainController
 
             }
 
-            return redirect($link[0]->url);
+                if(parser::isMobile())
+                {
+                    if(parser::osFamily() == 'Apple iOS')
+                    {
+                        //link for apple store
+                    }
+                    elseif(parser::osFamily() == 'Windows')
+                    {
+                        return redirect('https://www.microsoft.com/en-us/store/apps/google/9wzdncrfhx3w');
+                    }
+                    elseif(parser::osFamily() == 'Blackberry')
+                    {
+                        //link for blackberry store
+                    }
+                    elseif(parser::osFamily() == 'AndroidOS')
+                    {
+                        return redirect('https://play.google.com/store/apps/details?id=com.facebook.katana&hl=en');
+                    }
 
-        } else {
-            return 'lauda hua hai';
-            //return redirect('/');
+                 }
+                 else
+                 {
+                     return redirect($link[0]->url);
+
+                 }
         }
-
-
+        else
+        {
+            return redirect('/');
+        }
     }
 
 }
