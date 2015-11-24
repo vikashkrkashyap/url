@@ -110,7 +110,17 @@ class UserController extends MainController
                    ->groupBy('city')->distinct()->get();
 
        //Browser vs hits graph
-      return parser::detect();
+               $browser_data = Redirected_websites::where('url_id',$url->id)->select(DB::raw('(select(browser_name) from browsers where id =browser_id) as browser'),
+                   DB::raw('count(browser_id) as hits'))
+                   ->groupBy('browser')->distinct()->get();
+
+       //Operating System vs hits graph
+               $os_data = Redirected_websites::where('url_id',$url->id)->select(DB::raw('(select(operating_system) from operating_systems where id = os_id) as os'),
+                   DB::raw('count(os_id) as hits'))
+                   ->groupBy('os')->distinct()->get();
+
+
+
 
 
      // return view('User.hits',compact('url','hits_data','url_stats','items'));

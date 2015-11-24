@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRedirectedWebsitiesTable extends Migration
+class CreateRedirectedWebsitesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -19,8 +19,13 @@ class CreateRedirectedWebsitiesTable extends Migration
             $table->integer('url_id')->unsigned();
             $table->integer('city_id')->unsigned();
             $table->integer('country_id')->unsigned();
+            $table->integer('browser_id')->unsigned();
+            $table->integer('os_id')->unsigned();
             $table->string('website_url');
             $table->string('website_name');
+            $table->boolean('is_mobile');
+            $table->boolean('is_tablet');
+            $table->boolean('is_desktop');
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -41,6 +46,16 @@ class CreateRedirectedWebsitiesTable extends Migration
             $table->foreign('country_id')
                 ->references('id')
                 ->on('countries')
+                ->onDelete('cascade');
+
+            $table->foreign('browser_id')
+                ->references('id')
+                ->on('browsers')
+                ->onDelete('cascade');
+
+            $table->foreign('os_id')
+                ->references('id')
+                ->on('operating_systems')
                 ->onDelete('cascade');
 
         });

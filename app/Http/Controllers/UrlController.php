@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Browser;
 use App\City;
 use App\Country;
 use App\Hit;
 use App\Key;
+use App\Operating_system;
 use App\Redirected_websites;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -81,10 +83,6 @@ class UrlController extends MainController
         if ($link) {
 
             $current_ip = $request->getClientIp();
-            $data = new Hit;
-            $data->url_ip = $current_ip;
-            $data->url_id = $link[0]->id;
-            $data->save();
             $test = app('Illuminate\Routing\UrlGenerator')->previous();
 
 
@@ -92,22 +90,62 @@ class UrlController extends MainController
             // $name = $this->get_title($test);
             $name = 'google.com';
             $location = GeoIPFacade::getLocation('202.142.69.126');
+            $os_info = parser::detect();
+
             //City data
-            if(!City::where('city_name',$location['city'])->count()){
+            if(!City::where('city_name',$location['city'])->count())
+            {
                 $city = new City;
-                $city->city_name = $location['city'];
-                $city->save();
+                $city_id = $city->insertGetId([
+                    'city_name' => $location['city']
+                 ]);
+            }
+            else
+            {
+                $city_id = City::where('city_name',$location['city'])->value('id');
             }
 
             //Country Data
-            if(!Country::where('country_name',$location['country'])->count()){
+
+            if(!Country::where('country_name',$location['country'])->count())
+            {
                 $country = new Country;
-                $country->country_name = $location['country'];
-                $country->save();
+                $country_id = $country->insertGetId([
+                     'country_name' => $location['country']
+                ]);
+            }
+            else
+            {
+                $country_id = Country::where('country_name',$location['country'])->value('id');
             }
 
-            $city_id = DB::table('cities')->where('city_name', '=', $location['city'])->value('id');
-            $country_id = DB::table('countries')->where('country_name', '=', $location['country'])->value('id');
+            //Os Data
+
+            if(!Operating_system::where('operating_system',$os_info['osFamily'])->count())
+            {
+                $os = new Operating_system;
+                $os_id = $os->insertGetId([
+                       'operating_system' => $os_info['osFamily']
+                ]);
+            }
+            else
+            {
+                $os_id = Operating_system::where('operating_system',$os_info['osFamily'])->value('id');
+            }
+
+            //Browser_data
+
+            if(!Browser::where('browser_name',$os_info['browserFamily'])->count())
+            {
+                $browser = new Browser;
+                $browser_id =$browser->insertGetId([
+                          'browser_name' => $os_info['browserFamily']
+                ]);
+            }
+            else
+            {
+                $browser_id = Browser::where('browser_name',$os_info['browserFamily'])->value('id');
+            }
 
 
             //Redirected Website data
@@ -119,9 +157,18 @@ class UrlController extends MainController
                 $website_hits->country_id = $country_id;
                 $website_hits->website_url = $test;
                 $website_hits->website_name = $name;
+                $website_hits->browser_id = $browser_id;
+                $website_hits->os_id = $os_id;
+                $website_hits->is_mobile = $os_info['isMobile'];
+                $website_hits->is_tablet = $os_info['isTablet'];
+                $website_hits->is_desktop = $os_info['isDesktop'];
 
-
-            $website_hits->save();
+            //Hits data
+                $data = new Hit;
+                $data->url_ip = $current_ip;
+                $data->url_id = $link[0]->id;
+                $data->save();
+                $website_hits->save();
 
 
             //Deep linking
