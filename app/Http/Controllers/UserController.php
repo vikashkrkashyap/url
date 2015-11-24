@@ -53,7 +53,8 @@ class UserController extends MainController
             $data->user_id = $request->input('user_id');
             $data->ip = $request->getClientIp();
             $data->key = $key;
-            $data->title = $this->get_title($url);
+//            $data->title = $this->get_title($url);
+            $data->title = 'No Title';
             $data->save();
 
 
@@ -71,6 +72,7 @@ class UserController extends MainController
                 $full_url = URL::to('/').'/'.$key;
             }
             return response()->json([
+
                 'sorted_url' => $full_url,
                 'title'=>$data->title,
                 'original_url'=>$url,
