@@ -119,9 +119,18 @@ class UserController extends MainController
                    DB::raw('count(os_id) as hits'))
                    ->groupBy('os')->distinct()->get();
 
+       //platform Data
+               $query1 = Redirected_websites::where('url_id',$url->id)->select(DB::raw('"Desktop"  as device'),DB::raw('count(is_desktop) as hit'))->where('is_desktop',1)
+                   ->groupBy('is_desktop')->get();
 
+               $query2 = Redirected_websites::where('url_id',$url->id)->select(DB::raw('"Mobile"  as device'),DB::raw('count(is_mobile) as hits'))->where('is_mobile',0)
+                   ->groupBy('is_mobile')->get();
+               $query3 = Redirected_websites::where('url_id',$url->id)->select(DB::raw('"Tablet"  as device'),DB::raw('count(is_tablet) as hits'))->where('is_tablet',0)
+                   ->groupBy('is_tablet')->get();
 
-
+       $platform = array();
+       array_push($platform,['Desktop' =>$query1, 'Mobile' =>$query2,'Tablet' =>$query3]);
+      return $platform;
 
      // return view('User.hits',compact('url','hits_data','url_stats','items'));
 
