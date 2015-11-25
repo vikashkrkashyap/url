@@ -58,6 +58,53 @@ $(function() {
             $(this.i).css('font-size','14px');
         }
     });
+        $('.bar-chart-button').on('click', function(e) {
+                $('#link-bar-chart').empty();
+                var type = $(this).data('type')
+
+                    ,month = [
+                        { y: '2012-06', a: 100, b: 90 },
+                        { y: '2012-07', a: 75,  b: 65 },
+                        { y: '2012-08', a: 50,  b: 40 },
+                        { y: '2012-09', a: 75,  b: 65 },
+                        { y: '2012-10', a: 50,  b: 40 },
+                        { y: '2012-11', a: 75,  b: 65 },
+                        { y: '2012-12', a: 100, b: 90 }
+                    ],week = [
+                        { y: '2012 W1', a: 10, b: 20 },
+                        { y: '2012 W2', a: 50,  b: 10 },
+                        { y: '2012 W3', a: 40,  b: 80 },
+                        { y: '2012 W4', a: 90,  b: 25 },
+                        { y: '2012 W5', a: 10,  b: 20 },
+                        { y: '2012 W6', a: 35,  b: 60 },
+                        { y: '2012 W7', a: 8, b: 40 }
+                    ]
+                    ,day = [
+                        { y: '2012-12-25', a: 20, b: 50 },
+                        { y: '2012-12-26', a: 30,  b: 30 },
+                        { y: '2012-12-27', a: 100, b: 10 },
+                        { y: '2012-12-28', a: 10,  b: 15 },
+                        { y: '2012-12-29', a: 80,  b: 60 },
+                        { y: '2012-12-30', a: 20,  b: 65 },
+                        { y: '2012-12-31', a: 5, b: 95 }
+                    ]
+                    ,data = {
+                        month: month,
+                        week: week,
+                        day: day
+                    }
+                    ,line = new Morris.Bar({
+                        element: 'link-bar-chart',
+                        resize: true,
+                        data: data[type],
+                        xkey: 'y',
+                        ykeys: ['a', 'b'],
+                        labels: ['Price', 'Test'],
+                        lineColors: ['#3c8dbc', '#3c8dbc'],
+                        hideHover: 'auto'
+                    });
+        });
+
 });
 function getUrlTitle(_id,_link){
     $('.preloader-wrapper').show();
