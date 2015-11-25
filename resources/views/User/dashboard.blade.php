@@ -68,7 +68,11 @@
             </li>
             <li class="collection-item"><h5>Traffic</h5></li>
             <li class="collection-item">
-                <input type="text" value="75" data-min="0" data-max="75" data-thickness=".1" data-skin="tron" data-width="120" class="dial">
+                {{--<input type="text" value="75" data-min="0" data-max="75" data-thickness=".1" data-skin="tron" data-width="120" class="dial">--}}
+                <button class="bar-chart-button btn waves-effect waves-light" data-type="day" type="button">Day</button>
+                <button class="bar-chart-button btn waves-effect waves-light" data-type="week" type="button">Week</button>
+                <button class="bar-chart-button btn waves-effect waves-light" data-type="month" type="button">Month</button>
+                <div id="link-bar-chart"></div>
             </li>
         </ul>
     </div>

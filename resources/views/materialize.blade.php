@@ -12,6 +12,7 @@
         <script type="text/javascript" src="{{URL::asset('materialize/js/materialize.min.js')}}"></script>
         <script type="text/javascript" src="{{URL::asset('plugin/morris/morris.min.js')}}"></script>
         <script type="text/javascript" src="{{URL::asset('plugin/knob/jquery.knob.js')}}"></script>
+        <script type="text/javascript" src="{{URL::asset('plugin/raphaeljs/raphael.min.js')}}"></script>
     </head>
     <body>
         @yield('content')

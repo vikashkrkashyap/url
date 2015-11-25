@@ -16,7 +16,6 @@ class CreateBrowsersTable extends Migration
 
             $table->increments('id');
             $table->string('browser_name');
-            $table->timestamps();
         });
     }
 
