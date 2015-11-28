@@ -30,15 +30,54 @@ class UserController extends MainController
     }
     //function for showing the dashboard page after login or register
 
-    public function showDashboard(Request $request)
+    public function showDashboard()
     {
 
+        $url_data = DB::table('keys')->where('user_id','=',Auth::user()->id)->orderBy('id','desc')->get();
+        $recent_url = DB::table('keys')->where('user_id','=',Auth::user()->id)->orderBy('id','desc')->first();
+
+        $hits_today_by_time = Hit::where('url_id',$recent_url->id)->select(DB::raw('hour(created_at) as time'), DB::raw('IFNULL(count(id),0) as hits'))
+            ->groupBy(DB::raw('hour(created_at)'))->distinct()->orderBy('id','asc')->get();
+
+        $hits_per_week_by_day = Hit::where('url_id',$recent_url->id)->select(DB::raw('dayname(created_at) as dayofweek'), DB::raw('count(id) as hits'))
+            ->groupBy(DB::raw('dayname(created_at)'))->distinct()->orderBy(DB::raw('dayname(created_at)'),'asc')
+            ->whereBetween(DB::raw('date(created_at)'),[Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->get();
+
+        $hits_per_month = Hit::where('url_id',$recent_url->id)->select(DB::raw('day(created_at) as dayofmonth'), DB::raw('count(id) as hits'))
+            ->groupBy(DB::raw('day(created_at)'))->distinct()->orderBy(DB::raw('day(created_at)'),'asc')
+            ->whereBetween(DB::raw('date(created_at)'),[Carbon::now()->startOfmonth(),Carbon::now()->endOfMonth()])->get();
 
 
-           $url_data = DB::table('keys')->where('user_id','=',Auth::user()->id)->orderBy('id','desc')->get();
+        $hits_per_year = Hit::where('url_id',$recent_url->id)->select(DB::raw('monthname(created_at) as monthname'), DB::raw('count(id) as hits'))
+            ->groupBy(DB::raw('monthname(created_at)'))->distinct()->orderBy(DB::raw('monthname(created_at)'),'asc')
+            ->whereBetween(DB::raw('date(created_at)'),[Carbon::now()->startOfYear(),Carbon::now()->endOfYear()])->get();
 
 
-             return view('User.dashboard',compact('url_data'));
+//        return $hits_today_by_time;
+        return view('User.dashboard',compact('url_data','recent_url','hits_today_by_time','hits_per_week_by_day','hits_per_month','hits_per_year'));
+
+    }
+    public function showStats(Request $request)
+    {
+
+        $recent_url = DB::table('keys')->where(['user_id'=>Auth::user()->id,'id'=>$request->id])->orderBy('id','desc')->first();
+
+        $hits_today_by_time = Hit::where('url_id',$recent_url->id)->select(DB::raw('hour(created_at) as time'), DB::raw('count(id) as hits'))
+            ->groupBy(DB::raw('hour(created_at)'))->distinct()->orderBy('id','asc')->get();
+
+        $hits_per_week_by_day = Hit::where('url_id',$recent_url->id)->select(DB::raw('dayname(created_at) as dayofweek'), DB::raw('count(id) as hits'))
+            ->groupBy(DB::raw('dayname(created_at)'))->distinct()->orderBy(DB::raw('dayname(created_at)'),'asc')
+            ->whereBetween(DB::raw('date(created_at)'),[Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->get();
+
+        $hits_per_month = Hit::where('url_id',$recent_url->id)->select(DB::raw('day(created_at) as dayofmonth'), DB::raw('count(id) as hits'))
+            ->groupBy(DB::raw('day(created_at)'))->distinct()->orderBy(DB::raw('day(created_at)'),'asc')
+            ->whereBetween(DB::raw('date(created_at)'),[Carbon::now()->startOfmonth(),Carbon::now()->endOfMonth()])->get();
+
+        $hits_per_year = Hit::where('url_id',$recent_url->id)->select(DB::raw('monthname(created_at) as monthname'), DB::raw('count(id) as hits'))
+            ->groupBy(DB::raw('monthname(created_at)'))->distinct()->orderBy(DB::raw('monthname(created_at)'),'asc')
+            ->whereBetween(DB::raw('date(created_at)'),[Carbon::now()->startOfYear(),Carbon::now()->endOfYear()])->get();
+//return $hits_per_week_by_day;
+        return view('User.show_stats',compact('url_data','recent_url','hits_today_by_time','hits_per_week_by_day','hits_per_month','hits_per_year'));
 
     }
 
@@ -65,7 +104,8 @@ class UserController extends MainController
                     'user_id'=>$request->input('user_id'),
                     'ip'=>$request->getClientIp(),
                     'title'=>'No Title',
-                    'key'=>$key
+                    'key'=>$key,
+                    'created_at'=>Carbon::now()
                 ]);
             }
                 $full_url = URL::to('/').'/'. $key;

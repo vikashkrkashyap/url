@@ -27,6 +27,10 @@ Route::post('register', 'Auth\AuthController@postRegister');
 Route::get('dashboard',[
     'uses' => 'UserController@showDashboard',
      'as'  => 'dashboard']);
+Route::get('dashboard/show_stats',[
+    'uses' => 'UserController@showStats',
+    'as' => 'dashboard/show_stats'
+]);
 Route::get('foo','UserController@demo');
 //url generator route
 
