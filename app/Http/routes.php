@@ -26,7 +26,8 @@ Route::post('register', 'Auth\AuthController@postRegister');
 //dashboard
 Route::get('dashboard',[
     'uses' => 'UserController@showDashboard',
-     'as'  => 'dashboard']);
+     'as'  => 'dashboard'
+]);
 Route::get('dashboard/show_stats',[
     'uses' => 'UserController@showStats',
     'as' => 'dashboard/show_stats'
