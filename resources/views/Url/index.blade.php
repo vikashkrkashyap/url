@@ -17,11 +17,11 @@
         <h2 class="title">GET THE BEST OUT OF YOUR LINKS <br /></h2>
         <p class="intro">Own, understand and activate your audience <a href="#"> Learn More</a></p>
 
-        <form action="{{url('show')}}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"   novalidate>
+        <form action="{{url('show')}}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form">
             {!! csrf_field() !!}
                 <div class="input-group url">
-                    <input type="url" name="input_data"  id="mce-EMAIL" class="form-control" aria-label="..." placeholder="Enter the URL" autocomplete="off" autocorrect="off"
-                           required>
+                    <input type="url" name="input_data"  id="mce-EMAIL" class="form-control" aria-label="..." placeholder="Enter URL" autocomplete="off" autocorrect="off"
+                           required />
                     <input type="hidden" value="1" name="user_id">
                     <div class="input-group-btn">
                         <input name="subscribe" id="url_submit" type="submit" class="btn btn-cta btn-cta-primary" href="#" value="Short it"/>
@@ -110,9 +110,11 @@
 
 <!-- Javascript -->
 <script type="text/javascript" src="{{URL::asset('assets/plugins/jquery-1.11.2.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('external/js/ajaxHomeUrl.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('assets/plugins/bootstrap-hover-dropdown.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('assets/plugins/back-to-top.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('assets/js/main.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('external/js/ajaxHomeUrl.js')}}"></script>
 </body>
     @stop

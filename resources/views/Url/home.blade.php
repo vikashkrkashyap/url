@@ -78,7 +78,7 @@
 
                     <input type="url" name="input_data"  id="mce-EMAIL" placeholder="URL Please"
                            autocomplete="off" autocorrect="off"
-                           required >
+                           required />
                     <input type="hidden" value="1" name="user_id">
                     <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                     <div style="position: absolute; left: -5000px;">
