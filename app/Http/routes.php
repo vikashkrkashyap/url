@@ -37,6 +37,18 @@ Route::get('foo','UserController@demo');
 Route::get('/',[
     'uses' =>'UrlController@index',
      'as'  =>'home']);
+Route::get('/features',[
+    'uses' =>'UrlController@features',
+    'as'  =>'features'
+]);
+Route::get('/pricing',[
+    'uses' =>'UrlController@pricing',
+    'as'  =>'pricing'
+]);
+Route::get('/team',[
+    'uses' =>'UrlController@team',
+    'as'  =>'team'
+]);
 Route::post('show','UrlController@show');
 
 Route::get('/{key}','UrlController@hash');

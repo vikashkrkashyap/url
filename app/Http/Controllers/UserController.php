@@ -35,26 +35,31 @@ class UserController extends MainController
 
         $url_data = DB::table('keys')->where('user_id','=',Auth::user()->id)->orderBy('id','desc')->get();
         $recent_url = DB::table('keys')->where('user_id','=',Auth::user()->id)->orderBy('id','desc')->first();
+        if($recent_url){
+            $hits_today_by_time = Hit::where('url_id',$recent_url->id)->select(DB::raw('hour(created_at) as time'), DB::raw('IFNULL(count(id),0) as hits'))
+                ->groupBy(DB::raw('hour(created_at)'))->distinct()->orderBy('id','asc')->get();
 
-        $hits_today_by_time = Hit::where('url_id',$recent_url->id)->select(DB::raw('hour(created_at) as time'), DB::raw('IFNULL(count(id),0) as hits'))
-            ->groupBy(DB::raw('hour(created_at)'))->distinct()->orderBy('id','asc')->get();
+            $hits_per_week_by_day = Hit::where('url_id',$recent_url->id)->select(DB::raw('dayname(created_at) as dayofweek'), DB::raw('count(id) as hits'))
+                ->groupBy(DB::raw('dayname(created_at)'))->distinct()->orderBy(DB::raw('dayname(created_at)'),'asc')
+                ->whereBetween(DB::raw('date(created_at)'),[Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->get();
 
-        $hits_per_week_by_day = Hit::where('url_id',$recent_url->id)->select(DB::raw('dayname(created_at) as dayofweek'), DB::raw('count(id) as hits'))
-            ->groupBy(DB::raw('dayname(created_at)'))->distinct()->orderBy(DB::raw('dayname(created_at)'),'asc')
-            ->whereBetween(DB::raw('date(created_at)'),[Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->get();
-
-        $hits_per_month = Hit::where('url_id',$recent_url->id)->select(DB::raw('day(created_at) as dayofmonth'), DB::raw('count(id) as hits'))
-            ->groupBy(DB::raw('day(created_at)'))->distinct()->orderBy(DB::raw('day(created_at)'),'asc')
-            ->whereBetween(DB::raw('date(created_at)'),[Carbon::now()->startOfmonth(),Carbon::now()->endOfMonth()])->get();
+            $hits_per_month = Hit::where('url_id',$recent_url->id)->select(DB::raw('day(created_at) as dayofmonth'), DB::raw('count(id) as hits'))
+                ->groupBy(DB::raw('day(created_at)'))->distinct()->orderBy(DB::raw('day(created_at)'),'asc')
+                ->whereBetween(DB::raw('date(created_at)'),[Carbon::now()->startOfmonth(),Carbon::now()->endOfMonth()])->get();
 
 
-        $hits_per_year = Hit::where('url_id',$recent_url->id)->select(DB::raw('monthname(created_at) as monthname'), DB::raw('count(id) as hits'))
-            ->groupBy(DB::raw('monthname(created_at)'))->distinct()->orderBy(DB::raw('monthname(created_at)'),'asc')
-            ->whereBetween(DB::raw('date(created_at)'),[Carbon::now()->startOfYear(),Carbon::now()->endOfYear()])->get();
+            $hits_per_year = Hit::where('url_id',$recent_url->id)->select(DB::raw('monthname(created_at) as monthname'), DB::raw('count(id) as hits'))
+                ->groupBy(DB::raw('monthname(created_at)'))->distinct()->orderBy(DB::raw('monthname(created_at)'),'asc')
+                ->whereBetween(DB::raw('date(created_at)'),[Carbon::now()->startOfYear(),Carbon::now()->endOfYear()])->get();
 
 
 //        return $hits_today_by_time;
-        return view('User.dashboard',compact('url_data','recent_url','hits_today_by_time','hits_per_week_by_day','hits_per_month','hits_per_year'));
+            return view('User.dashboard',compact('url_data','recent_url','hits_today_by_time','hits_per_week_by_day','hits_per_month','hits_per_year'));
+
+        }else{
+            //$url_data = DB::table('keys')->where('user_id','=',Auth::user()->id)->orderBy('id','desc')->get();
+            return ('No Link Sorted');
+        }
 
     }
     public function showStats(Request $request)

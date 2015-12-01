@@ -50,6 +50,7 @@ $(document).on('ready',function (){
 
     $(document).on('click','.show_stats',function(e){
         e.preventDefault();
+        $(this).after('<i class="fa fa-circle-o-notch fa-spin></i>');
         $.ajax({
             url: 'dashboard/show_stats',
             headers:{'X-CSRF-TOKEN':$('input[name="_token"]').attr('value')},

@@ -1,3 +1,4 @@
+<?php $title = 'hi' ?>
 @extends('materialize')
         <!-- Navigation Header Start -->
 <nav class="navbar navbar-inverse">

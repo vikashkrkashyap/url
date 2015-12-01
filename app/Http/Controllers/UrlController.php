@@ -25,13 +25,24 @@ class UrlController extends MainController
     public function index(Request $request)
     {
         $url = $request->input('input_data');
-        $title = "Uct | Cut Your url";
+        $title = "Ucut | Cut Your url";
 
 
-        return view('Url.home', compact('title','url'));
+        return view('url.index', compact('title','url'));
 
     }
-
+    public function features(){
+        $title = "Ucut | Features";
+        return view('url.features',compact('title'));
+    }
+    public function pricing(){
+        $title = "Ucut | Pricing";
+        return view('url.pricing',compact('title'));
+    }
+    public function team(){
+        $title = "Ucut | Who we are";
+        return view('url.team',compact('title'));
+    }
     //saving the data in database
 
     public function show(Request $request)
