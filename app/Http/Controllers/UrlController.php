@@ -219,8 +219,7 @@ class UrlController extends MainController
                     }
 
                  }
-                 else
-                 {
+                 else {
                      return redirect($link[0]->url);
 
                  }
