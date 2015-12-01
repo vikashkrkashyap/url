@@ -35,7 +35,7 @@
                     <div class="footer-col-inner">
                         <ul class="social list-inline">
                             <li><a href="https://twitter.com/3rdwave_themes" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://facebook.com/ucutindia"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                             <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                             <li class="row-end"><a href="#"><i class="fa fa-rss"></i></a></li>
