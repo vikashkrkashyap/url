@@ -63,7 +63,6 @@ Route::post('update_url_title',[
     'uses'=>'UserController@updateUrlTitle',
     'as'=>'update_url_title'
 ]);
-
 //Api Routes
 
 Route::group(['prefix'=>'api/v1'] ,function(){
