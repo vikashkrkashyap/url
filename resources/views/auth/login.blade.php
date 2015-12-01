@@ -5,7 +5,7 @@
     <header id="header" class="header navbar-fixed-top">
         <div class="container">
             <h1 class="logo">
-                <a href="index.html"><img src="assets/images/logo-ucut.png" style="height:70px"></a>
+                <a href="{{URL::to('/')}}"><img src="assets/images/logo-ucut.png" style="height:70px"></a>
             </h1><!--//logo-->
             <nav class="main-nav navbar-right" role="navigation">
                 <div class="navbar-header">
@@ -53,7 +53,7 @@
                                             <input type="checkbox" name="remember"> Remember me
                                         </label>
                                     </div><!--//checkbox-->
-                                    <p class="lead">Don't have a Ucut account yet? <br /><a class="signup-link" href="signup.html">Create your account now</a></p>
+                                    <p class="lead">Don't have a Ucut account yet? <br /><a class="signup-link" href="{{URL::to('register')}}">Create your account now</a></p>
                                 </form>
                             </div><!--//form-container-->
                             <div class="social-btns col-md-5 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-sm-offset-0">
