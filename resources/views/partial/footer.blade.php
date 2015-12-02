@@ -49,7 +49,7 @@
                                 <button type="submit" class="btn btn-cta btn-cta-primary">Subscribe Now</button>
                             </form>
                         </div>
-                    </div><!--//footer-col-inner-->
+                    </div>
                 </div><!--//foooter-col-->
                 <div class="clearfix"></div>
             </div><!--//row-->
