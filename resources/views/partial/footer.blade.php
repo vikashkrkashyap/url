@@ -48,7 +48,7 @@
                                 </div>
                                 <button type="submit" class="btn btn-cta btn-cta-primary">Subscribe Now</button>
                             </form>
-                        </div><!--//subscription-form-->
+                        </div>
                     </div><!--//footer-col-inner-->
                 </div><!--//foooter-col-->
                 <div class="clearfix"></div>
