@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
-            </div><!--//row-->
+            </div>
 
         </div><!--//container-->
     </div><!--//footer-content-->
