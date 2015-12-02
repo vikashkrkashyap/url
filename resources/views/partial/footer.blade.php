@@ -50,7 +50,7 @@
                             </form>
                         </div>
                     </div>
-                </div><!--//foooter-col-->
+                </div>
                 <div class="clearfix"></div>
             </div><!--//row-->
 
