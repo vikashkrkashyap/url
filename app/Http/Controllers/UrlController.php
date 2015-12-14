@@ -105,7 +105,6 @@ class UrlController extends MainController
             $name = 'google.com';
             $location = GeoIPFacade::getLocation('202.142.69.126');
             $os_info = parser::detect();
-            return $os_info;
 
             //City data
             if(!City::where('city_name',$location['city'])->count())
