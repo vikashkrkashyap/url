@@ -29,6 +29,13 @@ class CreateUsersTable extends Migration
                 'email'=>'guest@ucut.in',
                 'password'=>bcrypt('admin')
             ]);
+        DB::table('users')
+            ->insert([
+                'first_name'=>'Test',
+                'last_name'=>'User',
+                'email'=>'test@ucut.in',
+                'password'=>bcrypt('admin')
+            ]);
     }
 
     /**

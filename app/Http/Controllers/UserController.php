@@ -33,9 +33,9 @@ class UserController extends MainController
     public function showDashboard()
     {
 
-        $url_data = DB::table('keys')->where('user_id','=',Auth::user()->id)->orderBy('id','desc')->get();
-        $recent_url = DB::table('keys')->where('user_id','=',Auth::user()->id)->orderBy('id','desc')->first();
-        if($recent_url){
+        $url_data = DB::table('keys')->where('user_id','=',Auth::user()->id)->orWhere('user_id','=',2)->orderBy('id','desc')->get();
+        $recent_url = DB::table('keys')->where('user_id','=',Auth::user()->id)->orWhere('user_id','=',2)->orderBy('id','desc')->first();
+//        if($recent_url){
             $hits_today_by_time = Hit::where('url_id',$recent_url->id)->select(DB::raw('hour(created_at) as time'), DB::raw('IFNULL(count(id),0) as hits'))
                 ->groupBy(DB::raw('hour(created_at)'))->distinct()->orderBy('id','asc')->get();
 
@@ -56,10 +56,10 @@ class UserController extends MainController
 //        return $hits_today_by_time;
             return view('User.dashboard',compact('url_data','recent_url','hits_today_by_time','hits_per_week_by_day','hits_per_month','hits_per_year'));
 
-        }else{
+//        }else{
             //$url_data = DB::table('keys')->where('user_id','=',Auth::user()->id)->orderBy('id','desc')->get();
-            return ('No Link Sorted');
-        }
+//            return view('User.dashboard_empty');
+//        }
 
     }
     public function showStats(Request $request)

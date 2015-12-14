@@ -11,17 +11,13 @@ class KeysTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
-        for($i=1;$i<3842;$i++) {
-            DB::table('keys')->insert([
-
-                'url' => 'www.' . str_random(7) . '.com',
-                'user_id' => '1',
-                'key' => str_random(2),
-                'ip' => $faker->localIpv4
-
-
-            ]);
-        }
+        \Illuminate\Support\Facades\DB::table('keys')->insert([
+            'url' => 'http://ucut.in',
+            'user_id'=>2,
+            'key'=>'ucut',
+            'ip'=> '127.0.0.1',
+            'title' => 'Cut your url',
+            'is_custom' => 0,
+        ]);
     }
 }

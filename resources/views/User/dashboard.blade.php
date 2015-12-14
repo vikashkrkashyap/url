@@ -1,4 +1,4 @@
-<?php $title = 'hi' ?>
+<?php $title = 'hi'; ?>
 @extends('materialize')
         <!-- Navigation Header Start -->
 <nav class="navbar navbar-inverse">
@@ -94,15 +94,15 @@
             <!-- Default panel contents -->
             <div class="panel-heading">
 
-                {{ date('dS F y',strtotime($recent_url->created_at))}}
+                {{ date('dS F y',strtotime(@$recent_url->created_at))}}
                 <a href="#"><i class="fa fa-share pull-right" title="Share"></i></a>
                 <a href="#"><i class="fa fa-pencil pull-right" title="Edit"></i></a>
                 <a href="#"><i class="fa fa-tag pull-right" title="Tag"></i></a>
             </div>
             <div class="panel-body">
                 <div>
-                    <h5>{{$recent_url->title}}</h5>
-                    <span class="copy_link" >{{\Illuminate\Support\Facades\URL::to('/').'/'.$recent_url->key}}</span>
+                    <h5>{{@$recent_url->title}}</h5>
+                    <span class="copy_link" >{{\Illuminate\Support\Facades\URL::to('/').'/'.@$recent_url->key}}</span>
                     <button class="btn btn-danger copy_button" type="button" name="action" style="height: 18px;line-height: 0px; padding: 3px;font-size: 10px;">Copy</button>
                 </div>
                 <div style="margin-top: 5px;">
@@ -124,7 +124,7 @@
                             <li><a href="#"><i class="fa fa-area-chart"></i>&nbsp;Area Chart</a></li>
                         </ul>
                     </div>
-                    <div data-day="{{$hits_today_by_time}}" data-week="{{$hits_per_week_by_day}}" data-month="{{$hits_per_month}}" data-year="{{$hits_per_year}}" id="link-bar-chart"></div>
+                    <div data-day="{{@$hits_today_by_time}}" data-week="{{@$hits_per_week_by_day}}" data-month="{{@$hits_per_month}}" data-year="{{@$hits_per_year}}" id="link-bar-chart"></div>
                 </div>
             </div>
         </div>
