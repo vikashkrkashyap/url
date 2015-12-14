@@ -8,6 +8,7 @@ use App\Hit;
 use App\Key;
 use App\Operating_system;
 use App\Redirected_websites;
+use hisorange\BrowserDetect\Provider\BrowserDetectService;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -105,6 +106,7 @@ class UrlController extends MainController
             $name = 'google.com';
             $location = GeoIPFacade::getLocation('202.142.69.126');
             $os_info = Parser::detect();
+            return $os_info;
 
             //City data
             if(!City::where('city_name',$location['city'])->count())
