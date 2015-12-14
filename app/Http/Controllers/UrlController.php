@@ -8,7 +8,6 @@ use App\Hit;
 use App\Key;
 use App\Operating_system;
 use App\Redirected_websites;
-use hisorange\BrowserDetect\Provider\BrowserDetectService;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -18,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\Validator;
-use hisorange\BrowserDetect\Facade\parser;
+use hisorange\BrowserDetect\Facade\Parser;
 use Torann\GeoIP\GeoIPFacade;
 
 class UrlController extends MainController
@@ -105,7 +104,7 @@ class UrlController extends MainController
             // $name = $this->get_title($test);
             $name = 'google.com';
             $location = GeoIPFacade::getLocation('202.142.69.126');
-            $os_info = Parser::detect();
+            $os_info = parser::detect();
             return $os_info;
 
             //City data
