@@ -16,9 +16,10 @@ class CreateKeysTable extends Migration
             $table->increments('id');
             $table->text('url');
             $table->integer('user_id')->unsigned();
-            $table->string('key');
+            $table->text('key');
             $table->string('ip',50);
             $table->string('title');
+            $table->boolean('is_custom')->default(false);
             $table->timestamps();
 
             $table->foreign('user_id')

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
+    const MAX_KEY_LENGTH = 20;
 
 //function for checking in database whether the random generated number is repeating or not
 
@@ -36,6 +37,15 @@ class MainController extends Controller
         return (in_array($input_url,$data));
     }
 
+//function Responsible for checking the guest url
+
+    public function checkGuestUrlRepetition($url)
+    {
+        $data= DB::table('keys')->where('user_id','=',1)->lists('url');
+
+        return (in_array($url,$data));
+    }
+
 //function Responsible for checking the repeated url in the database by Current User
 
     public function checkUserUrlRepetition($url)
@@ -46,11 +56,70 @@ class MainController extends Controller
 
     }
 
+
+//function responsible for the custom url
+
+    public function setCustomUrl($key)
+    {
+        $old_key = Key::orderBy('id','desc')->take(1)->value('key');
+
+        $key_length = strlen($key);
+
+        if($key_length >= 2 && $key_length <= self::MAX_KEY_LENGTH)
+        {
+
+            Key::where('key',$old_key)->update(['key' => $key,'is_custom' => true]);
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+ //function counting the number of key updated all size
+
+    public function countUpdatedKeyByNumberOfCharacter()
+    {
+        $old_key = Key::select(DB::raw('CHAR_LENGTH(`key`) as length'))->where('is_custom',0)->get();
+
+
+        if(count($old_key))
+        {
+            $key_count = array();
+
+            foreach ($old_key as $key) {
+                $key_count[] = $key->length;
+            }
+            $lol = array_count_values($key_count);
+
+
+            for($i=2;$i <= self::MAX_KEY_LENGTH;$i++ )
+            {
+                if(@$lol[$i] === null){
+                    array_push($lol, 0);
+                }
+            }
+
+            return $lol;
+
+        }
+        else {
+            $lol = [];
+            for ($i = 2; $i <= self::MAX_KEY_LENGTH; $i++) {
+                $lol[$i] = 0;
+            }
+            return $lol;
+        }
+    }
+
+
 //function responsible for minimum digit random number generation
 
     public function RandomControl()
     {
-        $random_digit_length = 15;
 
         $data = DB::table('keys')->lists('id');
 
@@ -60,18 +129,22 @@ class MainController extends Controller
             return $first_key;
         }
 
-        //Displaying the random number
 
         $unique_id = last($data);
         $max = 0;
         $min = 0;
-        for ($i = 2; $i < $random_digit_length; $i++) {
+        for ($i = 2; $i < self::MAX_KEY_LENGTH; $i++) {
+
+            $key_skipped = $this->countUpdatedKeyByNumberOfCharacter();
+            $max = $max + $key_skipped[$i];
 
             $min = $max;
-            $max = pow(62, $i);
+            $max = pow(62, $i); //+ $key_skipped;
+
 
             if ($unique_id > $min AND $unique_id <= $max) {
                 $random_number = str_random($i);
+
                 return $random_number;
             }
 

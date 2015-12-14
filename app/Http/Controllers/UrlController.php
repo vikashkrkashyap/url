@@ -15,6 +15,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\Validator;
 use hisorange\BrowserDetect\Facade\parser;
 use Torann\GeoIP\GeoIPFacade;
@@ -28,7 +29,10 @@ class UrlController extends MainController
         $title = "Ucut | Cut Your url";
 
 
-        return view('url.index', compact('title','url'));
+
+     $a = $this->countUpdatedKeyByNumberOfCharacter();
+//return $a[2];
+       return view('url.index', compact('title','url'));
 
     }
     public function features(){
@@ -49,32 +53,32 @@ class UrlController extends MainController
     {
 
 //
-        $url = $request->input('input_data');
 
         $key = $this->getUniqueRandomKey();
 
 
         if ($request->ajax()) {
 
-            $data = new key;
-            $data->url = $url;
-            $data->key = $key;
-            $data->user_id='1';
-            $data->ip = $request->getClientIp();
-            $data->save();
+            $url = $request->input('input_data');
 
-            //checking the url repetition and if repeated then returning the old one
-
-            if($this->checkUrlRepetition($url))
+            if($this->checkGuestUrlRepetition($url))
             {
-                $repeated_key = DB::table('keys')->where('keys.url','=',$url)->value('key');
-
-                $full_url = "http://ucut.in/" . $repeated_key;
-
+                $key = DB::table('keys')->where('keys.url','=',$url)->value('key');
             }
-            else{
-                $full_url = "http://ucut.in/" . $key;
+
+            else
+            {
+                $key = $this->getUniqueRandomKey();
+
+                $data = new key;
+                $data->url = $url;
+                $data->key = $key;
+                $data->user_id='1';
+                $data->ip = $request->getClientIp();
+                $data->save();
             }
+
+            $full_url = URL::to('/').'/'.$key;
 
             return response()->json([
                 'message' => 'created',
@@ -82,7 +86,6 @@ class UrlController extends MainController
               ]);
 
         }
-
 
     }
 
