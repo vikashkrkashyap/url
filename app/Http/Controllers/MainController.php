@@ -83,7 +83,7 @@ class MainController extends Controller
 
     public function countUpdatedKeyByNumberOfCharacter()
     {
-        $old_key = Key::select(DB::raw('CHAR_LENGTH(`key`) as length'))->where('is_custom',0)->get();
+        $old_key = Key::select(DB::raw('CHAR_LENGTH(`key`) as length'))->where('is_custom',1)->get();
 
 
         if(count($old_key))
@@ -121,25 +121,15 @@ class MainController extends Controller
     public function RandomControl()
     {
 
-        $data = DB::table('keys')->lists('id');
+        $unique_id = DB::table('keys')->orderBy('id','desc')->take(1)->value('id');
 
         //Displaying the random key for
-        if(count($data)== 0){
-           $first_key = str_random(2);
-            return $first_key;
-        }
 
-
-        $unique_id = last($data);
-        $max = 0;
         $min = 0;
-        for ($i = 2; $i < self::MAX_KEY_LENGTH; $i++) {
-
+        for ($i = 2; $i <= self::MAX_KEY_LENGTH; $i++) {
             $key_skipped = $this->countUpdatedKeyByNumberOfCharacter();
-            $max = $max + $key_skipped[$i];
 
-            $min = $max;
-            $max = pow(62, $i); //+ $key_skipped;
+            $max = pow(62, $i)+ $key_skipped[$i];
 
 
             if ($unique_id > $min AND $unique_id <= $max) {
@@ -147,6 +137,11 @@ class MainController extends Controller
 
                 return $random_number;
             }
+
+                $min = $max;
+                //return str_random(3);
+
+
 
         }
         return "something went wrong";

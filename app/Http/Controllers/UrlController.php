@@ -28,10 +28,9 @@ class UrlController extends MainController
         $url = $request->input('input_data');
         $title = "Ucut | Cut Your url";
 
+$a = $this->countUpdatedKeyByNumberOfCharacter();
 
-
-     $a = $this->countUpdatedKeyByNumberOfCharacter();
-//return $a[2];
+    return $a;
        return view('url.index', compact('title','url'));
 
     }

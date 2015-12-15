@@ -50,6 +50,10 @@ Route::get('/team',[
     'uses' =>'UrlController@team',
     'as'  =>'team'
 ]);
+Route::get('/test',[
+    'uses' =>'DemoController@test',
+    'as'  =>'test'
+]);
 Route::post('show','UrlController@show');
 
 Route::get('/{key}','UrlController@hash');
