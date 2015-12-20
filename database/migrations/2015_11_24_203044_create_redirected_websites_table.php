@@ -14,9 +14,9 @@ class CreateRedirectedWebsitesTable extends Migration
     {
         Schema::create('redirected_websites', function (Blueprint $table) {
 
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('url_id')->unsigned();
+            $table->bigInteger('url_id')->unsigned();
             $table->integer('city_id')->unsigned();
             $table->integer('country_id')->unsigned();
             $table->integer('browser_id')->unsigned();

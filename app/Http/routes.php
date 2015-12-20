@@ -54,9 +54,9 @@ Route::get('/test',[
     'uses' =>'DemoController@test',
     'as'  =>'test'
 ]);
-Route::post('show','UrlController@show');
+Route::post('show','NewUrlController@show');
 
-Route::get('/{key}','UrlController@hash');
+Route::get('/{key}','NewUrlController@hash');
 
 //after login
 

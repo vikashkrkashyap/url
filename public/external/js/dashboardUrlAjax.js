@@ -51,6 +51,7 @@ $(document).on('ready',function (){
     $(document).on('click','.show_stats',function(e){
         e.preventDefault();
         $(this).after('<i class="fa fa-circle-o-notch fa-spin></i>');
+        $('#chart-container').fadeOut('fast');
         $.ajax({
             url: 'dashboard/show_stats',
             headers:{'X-CSRF-TOKEN':$('input[name="_token"]').attr('value')},
@@ -59,6 +60,7 @@ $(document).on('ready',function (){
             data:{'id':$(this).attr('data-url-id')},
             success: function (response) {
                 $('#chart-container').html(response);
+                $('#chart-container').fadeIn('fast');
                 getFirstChartData();
                 getUpdatedChartData();
             }
@@ -89,7 +91,8 @@ function getUrlTitle(_id,_link){
 }
 function getUpdatedChartData(){
     $(document).on('click','.bar-chart-button', function(e) {
-        $('#link-bar-chart').empty();
+        $('#link-bar-chart').empty().stop(true,true).fadeOut();
+        $('#link-bar-chart').empty().stop(true,true).fadeIn();
         $('#chart-button-holder').find('button').removeClass('active');
         $(this).addClass('active');
         var type = $(this).data('type')

@@ -25,15 +25,15 @@ class UserController extends MainController
     public function __construct()
     {
         $this->middleware('auth');
-
-
     }
     //function for showing the dashboard page after login or register
 
     public function showDashboard()
     {
-
-        $url_data = DB::table('keys')->where('user_id','=',Auth::user()->id)->orWhere('user_id','=',2)->orderBy('id','desc')->get();
+        $data =(object) [
+            'title' => 'Dashboard | '.Auth::user()->first_name.' '.Auth::user()->last_name
+        ];
+        $url_data = DB::table('keys')->where('user_id','=',Auth::user()->id)->orWhere('user_id','=',2)->orderBy('id','desc')->paginate(6);
         $recent_url = DB::table('keys')->where('user_id','=',Auth::user()->id)->orWhere('user_id','=',2)->orderBy('id','desc')->first();
 //        if($recent_url){
             $hits_today_by_time = Hit::where('url_id',$recent_url->id)->select(DB::raw('hour(created_at) as time'), DB::raw('IFNULL(count(id),0) as hits'))
@@ -53,13 +53,7 @@ class UserController extends MainController
                 ->whereBetween(DB::raw('date(created_at)'),[Carbon::now()->startOfYear(),Carbon::now()->endOfYear()])->get();
 
 
-//        return $hits_today_by_time;
-            return view('User.dashboard',compact('url_data','recent_url','hits_today_by_time','hits_per_week_by_day','hits_per_month','hits_per_year'));
-
-//        }else{
-            //$url_data = DB::table('keys')->where('user_id','=',Auth::user()->id)->orderBy('id','desc')->get();
-//            return view('User.dashboard_empty');
-//        }
+            return view('User.dashboard',compact('data','url_data','recent_url','hits_today_by_time','hits_per_week_by_day','hits_per_month','hits_per_year'));
 
     }
     public function showStats(Request $request)
@@ -88,41 +82,28 @@ class UserController extends MainController
 
     public function postUrl(Request $request)
     {
-        if ($request->ajax()) {
 
-            $url = $request->input('user_url');
+        $url = $request->input('user_url');
+        $id = DB::table('keys')->InsertGetId([
+            'url' => $url,
+            'user_id' => $request->input('user_id'),
+            'key' =>'',
+            'ip' => $request->getClientIp()
+        ]);
+        $key = Key::find($id);
+        $key->key = exec('/usr/bin/python '.public_path('converter.py').' -d '.$id);
+        $key->update();
+
+            $full_url = URL::to('/').'/'. $key->key;
 
 
-            if($this->checkUserUrlRepetition($url)) {
-                $key = DB::table('keys')->where('keys.url', '=', $url)->value('key');
-                return response()->json([
-                    'flag'=>self::ALREADY_EXIST,
-                ]);
-            }
-            else {
-
-
-                $key = $this->getUniqueRandomKey();
-                $data = new Key;
-                $_id = $data->insertGetId([
-                    'url'=>$url,
-                    'user_id'=>$request->input('user_id'),
-                    'ip'=>$request->getClientIp(),
-                    'title'=>'No Title',
-                    'key'=>$key,
-                    'created_at'=>Carbon::now()
-                ]);
-            }
-                $full_url = URL::to('/').'/'. $key;
-            }
-
-            return response()->json([
-                '_id'=>$_id,
-                'sorted_url' => $full_url,
-                'title'=>'Retriving...',
-                'original_url'=>$url,
-                'flag'=>self::NEW_VALUE
-            ]);
+        return response()->json([
+            '_id'=>$id,
+            'sorted_url' => $full_url,
+            'title'=>'Retriving...',
+            'original_url'=>$url,
+            'flag'=>self::NEW_VALUE
+        ]);
     }
 
 

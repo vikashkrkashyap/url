@@ -14,7 +14,7 @@ class CreateAppStoreLinksTable extends Migration
     {
         Schema::create('app_store_links',function(Blueprint $table){
 
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->text('android_store');
             $table->text('apple_store');
             $table->text('windows_store');

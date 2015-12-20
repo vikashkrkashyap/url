@@ -14,7 +14,7 @@ class MainController extends Controller
 {
     const MAX_KEY_LENGTH = 20;
 
-//function for checking in database whether the random generated number is repeating or not
+    //function for checking in database whether the random generated number is repeating or not
 
     public function getUniqueRandomKey()
     {

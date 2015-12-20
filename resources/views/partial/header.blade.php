@@ -17,8 +17,12 @@
                     <li class="<?php if(Route::getCurrentRoute()->getPath() == '/'){ echo 'active' ;} ?> nav-item"><a href="{{action('UrlController@index')}}">Home</a></li>
                     <li class="<?php if(Route::getCurrentRoute()->getPath() == 'features'){ echo 'active' ;} ?> nav-item"><a href="{{action('UrlController@features')}}">Features</a></li>
                     <li class="<?php if(Route::getCurrentRoute()->getPath() == 'pricing'){ echo 'active' ;} ?> nav-item"><a href="{{action('UrlController@pricing')}}">Pricing</a></li>
-                    <li class="<?php if(Route::getCurrentRoute()->getPath() == 'login'){ echo 'active' ;} ?> nav-item"><a href="{{URL::to('login')}}">Log in</a></li>
-                    <li class="<?php if(Route::getCurrentRoute()->getPath() == 'register'){ echo 'active' ;} ?> nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary" href="{{URL::to('register')}}">Sign Up Free</a></li>
+                    <li class="<?php if(Route::getCurrentRoute()->getPath() == 'login'){ echo 'active' ;} ?> nav-item"><a href="<?php if(Auth::user()) { echo URL::to('dashboard'); } else {echo URL::to('login');} ?>"><?php if(Auth::user()){ echo Auth::user()->first_name; }else{ echo 'Login'; } ?></a></li>
+                    @if(Auth::user())
+                        <li class="<?php if(Route::getCurrentRoute()->getPath() == 'pricing'){ echo 'active' ;} ?> nav-item"><a href="{{url('logout')}}">Logout</a></li>
+                    @else
+                        <li class="<?php if(Route::getCurrentRoute()->getPath() == 'register'){ echo 'active' ;} ?> nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary" href="{{URL::to('register')}}">Sign Up Free</a></li>
+                    @endif
                 </ul><!--//nav-->
             </div><!--//navabr-collapse-->
         </nav><!--//main-nav-->

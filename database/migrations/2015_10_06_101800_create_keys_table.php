@@ -13,10 +13,10 @@ class CreateKeysTable extends Migration
     public function up()
     {
         Schema::create('keys',function(Blueprint $table){
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->text('url');
             $table->integer('user_id')->unsigned();
-            $table->text('key');
+            $table->string('key')->nullable();
             $table->string('ip',50);
             $table->string('title');
             $table->boolean('is_custom')->default(false);

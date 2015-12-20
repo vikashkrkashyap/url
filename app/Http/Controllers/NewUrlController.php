@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Browser;
 use App\City;
 use App\Country;
@@ -20,18 +21,14 @@ use Illuminate\Validation\Validator;
 use hisorange\BrowserDetect\Facade\Parser;
 use Torann\GeoIP\GeoIPFacade;
 
-class UrlController extends MainController
+class NewUrlController extends Controller
 {
-
     public function index(Request $request)
     {
         $url = $request->input('input_data');
         $title = "Ucut | Cut Your url";
 
-        $a = $this->countUpdatedKeyByNumberOfCharacter();
-
-       return view('url.index', compact('title','url'));
-
+        return view('url.index', compact('title','url'));
     }
     public function features(){
         $title = "Ucut | Features";
@@ -45,59 +42,36 @@ class UrlController extends MainController
         $title = "Ucut | Who we are";
         return view('url.team',compact('title'));
     }
-    //saving the data in database
+    public function show(Request $request){
+        $url = $request->input('input_data');
+        $id = DB::table('keys')->InsertGetId([
+            'url' => $url,
+            'user_id' => 1,
+            'key' =>'',
+            'ip' => $request->getClientIp()
+        ]);
+        $keys = Key::find($id);
+        $keys->key = exec('/usr/bin/python '.public_path('converter.py').' -d '.$id);
+        $keys->update();
 
-    public function show(Request $request)
-    {
-
-//
-
-        $key = $this->getUniqueRandomKey();
-
-
-        if ($request->ajax()) {
-
-            $url = $request->input('input_data');
-
-            if($this->checkGuestUrlRepetition($url))
-            {
-                $key = DB::table('keys')->where('keys.url','=',$url)->value('key');
-            }
-
-            else
-            {
-                $key = $this->getUniqueRandomKey();
-
-                $data = new key;
-                $data->url = $url;
-                $data->key = $key;
-                $data->user_id='1';
-                $data->ip = $request->getClientIp();
-                $data->save();
-            }
-
-            $full_url = URL::to('/').'/'.$key;
-
-            return response()->json([
-                'message' => 'created',
-                'url' => $full_url
-              ]);
-
-        }
+        $full_url = URL::to('/').'/'.$keys->key;
+        return response()->json([
+            'message' => 'created',
+            'url' => $full_url
+        ]);
 
     }
 
-
-    public function hash(Request $request,$key)
-    {
-        $link = DB::table('keys')->where('key', '=', $key)->get();
+    /**
+     *
+     */
+    public function hash(Request $request, $key){
+        $id = exec('/usr/bin/python '.public_path('converter.py').' -s '.$key);
+        $link = Key::find($id);
 
         if ($link) {
-
             $current_ip = $request->getClientIp();
             $test = app('Illuminate\Routing\UrlGenerator')->previous();
-
-
 
             // $name = $this->get_title($test);
             $name = 'google.com';
@@ -110,7 +84,7 @@ class UrlController extends MainController
                 $city = new City;
                 $city_id = $city->insertGetId([
                     'city_name' => $location['city']
-                 ]);
+                ]);
             }
             else
             {
@@ -118,12 +92,11 @@ class UrlController extends MainController
             }
 
             //Country Data
-
             if(!Country::where('country_name',$location['country'])->count())
             {
                 $country = new Country;
                 $country_id = $country->insertGetId([
-                     'country_name' => $location['country']
+                    'country_name' => $location['country']
                 ]);
             }
             else
@@ -132,12 +105,11 @@ class UrlController extends MainController
             }
 
             //Os Data
-
             if(!Operating_system::where('operating_system',$os_info['osFamily'])->count())
             {
                 $os = new Operating_system;
                 $os_id = $os->insertGetId([
-                       'operating_system' => $os_info['osFamily']
+                    'operating_system' => $os_info['osFamily']
                 ]);
             }
             else
@@ -146,12 +118,11 @@ class UrlController extends MainController
             }
 
             //Browser_data
-
             if(!Browser::where('browser_name',$os_info['browserFamily'])->count())
             {
                 $browser = new Browser;
                 $browser_id =$browser->insertGetId([
-                          'browser_name' => $os_info['browserFamily']
+                    'browser_name' => $os_info['browserFamily']
                 ]);
             }
             else
@@ -159,32 +130,27 @@ class UrlController extends MainController
                 $browser_id = Browser::where('browser_name',$os_info['browserFamily'])->value('id');
             }
 
-
             //Redirected Website data
-
-                $website_hits = new Redirected_websites;
-                $website_hits->user_id =$link[0]->user_id;
-                $website_hits->url_id = $link[0]->id;
-                $website_hits->city_id = $city_id;
-                $website_hits->country_id = $country_id;
-                $website_hits->website_url = $test;
-                $website_hits->website_name = $name;
-                $website_hits->browser_id = $browser_id;
-                $website_hits->os_id = $os_id;
-                $website_hits->is_mobile = $os_info['isMobile'];
-                $website_hits->is_tablet = $os_info['isTablet'];
-                $website_hits->is_desktop = $os_info['isDesktop'];
+            $website_hits = new Redirected_websites;
+            $website_hits->user_id =$link->user_id;
+            $website_hits->url_id = $link->id;
+            $website_hits->city_id = $city_id;
+            $website_hits->country_id = $country_id;
+            $website_hits->website_url = $test;
+            $website_hits->website_name = $name;
+            $website_hits->browser_id = $browser_id;
+            $website_hits->os_id = $os_id;
+            $website_hits->is_mobile = $os_info['isMobile'];
+            $website_hits->is_tablet = $os_info['isTablet'];
+            $website_hits->is_desktop = $os_info['isDesktop'];
 
             //Hits data
-                $data = new Hit;
-                $data->url_ip = $current_ip;
-                $data->url_id = $link[0]->id;
-                $data->save();
-                $website_hits->save();
-
-
+            $data = new Hit;
+            $data->url_ip = $current_ip;
+            $data->url_id = $link->id;
+            $data->save();
+            $website_hits->save();
             //Deep linking
-
 
             if (parser::isMobile()) {
                 if (parser::osFamily() == 'Apple iOS') {
@@ -196,39 +162,36 @@ class UrlController extends MainController
                 } elseif (parser::osFamily() == 'AndroidOS') {
                     return redirect('https://play.google.com/store/apps/details?id=com.facebook.katana&hl=en');
                 }
-
-
             }
 
-                if(parser::isMobile())
+            if(parser::isMobile())
+            {
+                if(parser::osFamily() == 'Apple iOS')
                 {
-                    if(parser::osFamily() == 'Apple iOS')
-                    {
-                        //link for apple store
-                    }
-                    elseif(parser::osFamily() == 'Windows')
-                    {
-                        return redirect('https://www.microsoft.com/en-us/store/apps/google/9wzdncrfhx3w');
-                    }
-                    elseif(parser::osFamily() == 'Blackberry')
-                    {
-                        //link for blackberry store
-                    }
-                    elseif(parser::osFamily() == 'AndroidOS')
-                    {
-                        return redirect('https://play.google.com/store/apps/details?id=com.facebook.katana&hl=en');
-                    }
+                    //link for apple store
+                }
+                elseif(parser::osFamily() == 'Windows')
+                {
+                    return redirect('https://www.microsoft.com/en-us/store/apps/google/9wzdncrfhx3w');
+                }
+                elseif(parser::osFamily() == 'Blackberry')
+                {
+                    //link for blackberry store
+                }
+                elseif(parser::osFamily() == 'AndroidOS')
+                {
+                    return redirect('https://play.google.com/store/apps/details?id=com.facebook.katana&hl=en');
+                }
 
-                 }
-                 else {
-                     return redirect($link[0]->url);
+            }
+            else {
+                return redirect($link->url);
 
-                 }
+            }
         }
         else
         {
             return redirect('/');
         }
     }
-
 }
