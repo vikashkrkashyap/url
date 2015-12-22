@@ -54,6 +54,10 @@ Route::get('/test',[
     'uses' =>'DemoController@test',
     'as'  =>'test'
 ]);
+Route::get('/analytics',[
+    'uses' => 'AnalyticsController@index',
+    'as' => 'analytics'
+]);
 Route::post('show','NewUrlController@show');
 
 Route::get('/{key}','NewUrlController@hash');

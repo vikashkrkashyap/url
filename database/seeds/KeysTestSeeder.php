@@ -20,8 +20,6 @@ class KeysTestSeeder extends Seeder
                 'user_id' => '1',
                 'key' => str_random(2),
                 'ip' => $faker->localIpv4
-
-
             ]);
         }
     }

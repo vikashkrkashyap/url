@@ -99,9 +99,9 @@ class UrlController extends MainController
 
 
 
-            // $name = $this->get_title($test);
-            $name = 'google.com';
-            $location = GeoIPFacade::getLocation('202.142.69.126');
+             $name = $this->get_title($test);
+//            $name = 'google.com';
+            $location = GeoIPFacade::getLocation($current_ip);
             $os_info = parser::detect();
 
             //City data

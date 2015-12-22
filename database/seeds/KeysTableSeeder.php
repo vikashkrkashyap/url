@@ -14,7 +14,7 @@ class KeysTableSeeder extends Seeder
         \Illuminate\Support\Facades\DB::table('keys')->insert([
             'url' => 'http://ucut.in',
             'user_id'=>2,
-            'key'=>'uct',
+            'key'=>1,
             'ip'=> '127.0.0.1',
             'title' => 'Cut your url',
             'is_custom' => 0,
