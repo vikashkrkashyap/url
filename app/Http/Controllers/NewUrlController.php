@@ -73,8 +73,8 @@ class NewUrlController extends Controller
             $current_ip = $request->getClientIp();
             $test = app('Illuminate\Routing\UrlGenerator')->previous();
 
-             $name = $this->get_title($test);
-//            $name = 'google.com';
+//             $name = $this->get_title($test);
+            $name = 'google.com';
             $location = GeoIPFacade::getLocation($current_ip);
             $os_info = parser::detect();
 
