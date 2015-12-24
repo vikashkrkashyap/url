@@ -97,10 +97,6 @@ class UrlController extends MainController
             $current_ip = $request->getClientIp();
             $test = app('Illuminate\Routing\UrlGenerator')->previous();
 
-
-
-             $name = $this->get_title($test);
-//            $name = 'google.com';
             $location = GeoIPFacade::getLocation($current_ip);
             $os_info = parser::detect();
 
@@ -168,7 +164,6 @@ class UrlController extends MainController
                 $website_hits->city_id = $city_id;
                 $website_hits->country_id = $country_id;
                 $website_hits->website_url = $test;
-                $website_hits->website_name = $name;
                 $website_hits->browser_id = $browser_id;
                 $website_hits->os_id = $os_id;
                 $website_hits->is_mobile = $os_info['isMobile'];

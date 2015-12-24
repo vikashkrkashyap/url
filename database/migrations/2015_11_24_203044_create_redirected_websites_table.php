@@ -22,7 +22,6 @@ class CreateRedirectedWebsitesTable extends Migration
             $table->integer('browser_id')->unsigned();
             $table->integer('os_id')->unsigned();
             $table->string('website_url');
-            $table->string('website_name');
             $table->boolean('is_mobile');
             $table->boolean('is_tablet');
             $table->boolean('is_desktop');
